@@ -20,8 +20,9 @@ This repository is a **starter for a 2h15 hands-on lab**. A participant (a Capge
 - `cv-scoring` — structured scoring grid + ranking output.
 - `press-synthesis` — turn raw news items into an executive briefing.
 - `deck-builder` — write a JSON deck spec, render a themed .pptx.
+- `frontend-design` — production-grade, non-generic UI (use it to present results as a polished HTML view). Vendored from Anthropic's official plugin (Apache-2.0).
 
-Use them when the task matches. They define the expected output shape so results are consistent and presentable.
+All skills are bundled in this repo — no marketplace or plugin install needed. Use them when the task matches. They define the expected output shape so results are consistent and presentable.
 
 ## Tooling
 

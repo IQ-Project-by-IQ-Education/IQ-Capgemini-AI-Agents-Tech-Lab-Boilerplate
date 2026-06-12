@@ -46,22 +46,18 @@ claude
 #    "Let's build the Radar press-synthesis project. Read its README and the skill, then start."
 ```
 
-The repo ships with three **skills** under `.claude/skills/` — Claude Code loads them automatically and uses them when relevant. They encode the "house style" for scoring grids, press synthesis, and deck building.
+## Skills (bundled — no download)
 
----
+All skills live **inside this repo** under `.claude/skills/` and are loaded automatically by Claude Code. **Nothing to install, nothing to download from a marketplace** — clone the repo and they're there.
 
-## Plugins (auto-enabled)
-
-This repo declares two Claude Code plugins in `.claude/settings.json`. The **first time you trust this folder**, Claude Code will prompt you to install them — accept:
-
-| Plugin | What it brings |
+| Skill | What it's for |
 | --- | --- |
-| **superpowers** | A disciplined way of working — brainstorming, planning, systematic debugging, and reusable skills. Use it to scope your project well before building. |
-| **frontend-design** | Production-grade, non-generic UI generation. Use it when you want to present results as a polished HTML dashboard or web view instead of raw Markdown. |
+| **cv-scoring** | House-style scoring grid + ranking output (Talent). |
+| **press-synthesis** | Raw news → executive briefing (Radar). |
+| **deck-builder** | JSON deck spec → themed `.pptx` (Deck). |
+| **frontend-design** | Production-grade, non-generic UI generation — use it to present results as a polished HTML dashboard or web view. *(Vendored from Anthropic's official plugin, Apache-2.0 — see `.claude/skills/frontend-design/LICENSE`.)* |
 
-Both come from the official marketplace `anthropics/claude-plugins-official`. If the prompt doesn't appear, run `/plugin` and enable `superpowers` and `frontend-design`.
-
-> The lab's **core works without the plugins** — the three skills under `.claude/skills/` are local to this repo and always available. The plugins are an enhancement; if your network can't reach the GitHub marketplace, you can still run all three projects.
+This repo is **fully self-contained**: no external plugin marketplace is required.
 
 ---
 
@@ -76,7 +72,7 @@ What this repo needs to reach the network, and what stays local:
 | **Deck** project | **No** (offline) | Renders `.pptx` fully locally via `pptxgenjs`. |
 | **Talent** project | **No** for data | CVs are local PDFs read on-device. Scoring is done by Claude. |
 | **Radar** project | Yes | Public news (Tavily / NewsAPI, or Claude's web search). |
-| Plugins (optional) | Yes | GitHub marketplace `anthropics/claude-plugins-official`. |
+| Skills (incl. frontend-design) | **No** | All bundled in the repo — no marketplace, no plugin install. |
 
 **Data handling:** all data in this repo is **public or synthetic**. The `cvs-bank/` PDFs are a public, anonymized résumé dataset (PII redacted — see its [README](projects/talent-cv-scoring/cvs-bank/README.md)); job descriptions and proxy CVs are synthetic. **No real or internal Capgemini data is included.** No secrets are committed (`.env` is git-ignored; only `.env.example` with empty placeholders ships).
 
@@ -88,11 +84,12 @@ What this repo needs to reach the network, and what stays local:
 .
 ├── CLAUDE.md                  # Project context Claude Code reads on every session
 ├── .claude/
-│   ├── settings.json          # Plugins (superpowers, frontend-design) + permissions
-│   └── skills/                # Reusable house-style skills
+│   ├── settings.json          # Permissions for the lab
+│   └── skills/                # Bundled skills — no download needed
 │       ├── cv-scoring/
 │       ├── press-synthesis/
-│       └── deck-builder/
+│       ├── deck-builder/
+│       └── frontend-design/   # vendored (Anthropic, Apache-2.0)
 ├── projects/                  # Pick ONE — each is a self-contained brief
 │   ├── talent-cv-scoring/
 │   ├── radar-press-synthesis/

@@ -11,7 +11,7 @@ This repository is a **starter for a 2h15 hands-on lab**. A participant (a Capge
 
 ## The three projects (see `projects/`)
 
-- **Talent** (`projects/talent-cv-scoring`) — score & rank CVs against a job description. Main data: `cvs-bank/` (116 anonymized PDF CVs); `data/cvs/` has 3 markdown CVs for a quick smoke test.
+- **Talent** (`projects/talent-cv-scoring`) — score & rank CVs against a job description. Main data: `data/cvs/` — 116 anonymized PDF CVs (plus 3 markdown CVs, `candidate-*.md`, for a quick smoke test). Read PDFs with the `pdf-reading` skill / `npm run read:pdf`.
 - **Radar** (`projects/radar-press-synthesis`) — daily executive news briefing.
 - **Deck** (`projects/deck-pptx-creation`) — turn content into a professional .pptx.
 
@@ -21,6 +21,7 @@ This repository is a **starter for a 2h15 hands-on lab**. A participant (a Capge
 - `press-synthesis` — turn raw news items into an executive briefing.
 - `deck-builder` — write a JSON deck spec, render a themed .pptx.
 - `frontend-design` — production-grade, non-generic UI (use it to present results as a polished HTML view). Vendored from Anthropic's official plugin (Apache-2.0).
+- `pdf-reading` — read/extract text from any PDF on-device (CVs, any reference doc), standalone via `npm run read:pdf`.
 
 All skills are bundled in this repo — no marketplace or plugin install needed. Use them when the task matches. They define the expected output shape so results are consistent and presentable.
 
@@ -28,7 +29,7 @@ All skills are bundled in this repo — no marketplace or plugin install needed.
 
 - **News freshness:** `scripts/fetch-news.ts` (Tavily / NewsAPI). Run with `npm run fetch:news -- "<query>"`. Reads keys from `.env`; if none is set, it explains what's missing instead of failing silently. Prefer your own web search/fetch when it's faster — the script exists so the fetch is reproducible and easy to re-run.
 - **Deck rendering:** `scripts/build-deck.ts` (pptxgenjs). Run with `npm run build:deck -- <deck.json> [out.pptx]`. You write the content as a JSON deck spec; the script renders the house theme.
-- **CV scoring:** Claude reads the `cvs-bank/` PDFs directly — no script needed. For a live demo, sample ~8–10 PDFs rather than all 116.
+- **PDF reading:** `scripts/read-pdf.mjs` (pdf.js, pure JS, no native deps). Run with `npm run read:pdf -- <file.pdf>`. Use it for CVs (`projects/talent-cv-scoring/data/cvs/*.pdf`) or any reference PDF a participant brings. Native PDF reading works too; the script is the standalone guarantee. For a live CV demo, sample ~8–10 rather than all 116.
 
 ## Output conventions
 

@@ -39,6 +39,15 @@ Slide types: `title`, `section`, `bullets`, `two-column`, `quote`, `closing`. St
 - Consistent theme: deep-ink cover/closing, accent blue, clean white content slides, 16:9.
 - You don't set colors or positions — focus on words. The renderer handles layout.
 
+## Capgemini branding
+
+For a Capgemini-branded deck, follow the brand tokens in
+`projects/deck-pptx-creation/brand/capgemini-brand.md` (palette: Capgemini Blue
+`#0070AD`, Vibrant Blue `#12ABDB`; font: Verdana as the Ubuntu-compatible fallback).
+Those tokens are transcribed from Capgemini's official 2017 brand guidelines. (The
+full brand PDF isn't bundled; the tokens are what the renderer needs. If a participant
+provides the PDF, read it with `npm run read:pdf` for logo rules, shapes, or detail.)
+
 ## Limits to state out loud
 
 - Great design can't save a weak story — get the narrative right first.

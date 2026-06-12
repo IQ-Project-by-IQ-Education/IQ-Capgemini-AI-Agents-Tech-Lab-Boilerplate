@@ -56,6 +56,7 @@ All skills live **inside this repo** under `.claude/skills/` and are loaded auto
 | **press-synthesis** | Raw news → executive briefing (Radar). |
 | **deck-builder** | JSON deck spec → themed `.pptx` (Deck). |
 | **frontend-design** | Production-grade, non-generic UI generation — use it to present results as a polished HTML dashboard or web view. *(Vendored from Anthropic's official plugin, Apache-2.0 — see `.claude/skills/frontend-design/LICENSE`.)* |
+| **pdf-reading** | Read/extract text from any PDF on-device (CVs, any reference doc) — standalone via `npm run read:pdf`, no network or Python. |
 
 This repo is **fully self-contained**: no external plugin marketplace is required.
 
@@ -67,14 +68,15 @@ What this repo needs to reach the network, and what stays local:
 
 | Capability | Network needed? | Notes |
 | --- | --- | --- |
-| `npm install` | Yes, once | npm registry. Pinned via `package-lock.json`. Deps: `pptxgenjs`, `tsx`, `typescript`, `@types/node` (0 known vulnerabilities). |
+| `npm install` | Yes, once | npm registry. Pinned via `package-lock.json`. Deps: `pptxgenjs`, `pdfjs-dist`, `tsx`, `typescript`, `@types/node` (0 known vulnerabilities). |
 | Claude Code itself | Yes | `api.anthropic.com` — the agent engine. |
 | **Deck** project | **No** (offline) | Renders `.pptx` fully locally via `pptxgenjs`. |
 | **Talent** project | **No** for data | CVs are local PDFs read on-device. Scoring is done by Claude. |
+| PDF reading (`read:pdf`) | **No** (offline) | Local text extraction via pdf.js — no network, no Python. |
 | **Radar** project | Yes | Public news (Tavily / NewsAPI, or Claude's web search). |
 | Skills (incl. frontend-design) | **No** | All bundled in the repo — no marketplace, no plugin install. |
 
-**Data handling:** all data in this repo is **public or synthetic**. The `cvs-bank/` PDFs are a public, anonymized résumé dataset (PII redacted — see its [README](projects/talent-cv-scoring/cvs-bank/README.md)); job descriptions and proxy CVs are synthetic. **No real or internal Capgemini data is included.** No secrets are committed (`.env` is git-ignored; only `.env.example` with empty placeholders ships).
+**Data handling:** all data in this repo is **public or synthetic**. The `data/cvs/` PDFs are a public, anonymized résumé dataset (PII redacted — see its [README](projects/talent-cv-scoring/data/cvs/README.md)); job descriptions and proxy CVs are synthetic. Capgemini's brand essentials are summarized in [`capgemini-brand.md`](projects/deck-pptx-creation/brand/capgemini-brand.md) (the full 45 MB brand PDF is intentionally **not** bundled, to keep clones lean). **No real or internal Capgemini candidate/business data is included.** No secrets are committed (`.env` is git-ignored; only `.env.example` with empty placeholders ships).
 
 ---
 
@@ -89,12 +91,13 @@ What this repo needs to reach the network, and what stays local:
 │       ├── cv-scoring/
 │       ├── press-synthesis/
 │       ├── deck-builder/
-│       └── frontend-design/   # vendored (Anthropic, Apache-2.0)
+│       ├── frontend-design/   # vendored (Anthropic, Apache-2.0)
+│       └── pdf-reading/       # read PDFs on-device, standalone
 ├── projects/                  # Pick ONE — each is a self-contained brief
-│   ├── talent-cv-scoring/
+│   ├── talent-cv-scoring/     # data/cvs/ = 116 anonymized PDF CVs
 │   ├── radar-press-synthesis/
-│   └── deck-pptx-creation/
-├── scripts/                   # TypeScript helpers (news fetch / deck render)
+│   └── deck-pptx-creation/    # incl. Capgemini brand tokens (brand/)
+├── scripts/                   # Helpers: fetch-news, build-deck (tsx) · read-pdf (node)
 └── docs/
     └── good-practices.md      # The production reflexes we voice-over during the build
 ```

@@ -11,9 +11,13 @@ A database of **116 public, anonymized CVs in PDF** — the main data source for
 
 ## Usage
 
-Claude Code can read the PDFs directly:
+Read the PDFs on-device — natively, or with the bundled standalone extractor:
+
+```bash
+npm run read:pdf -- projects/talent-cv-scoring/data/cvs/10138632.pdf
+```
 
 - **Don't score all 116 live** — pick a sample of ~8–10 for the on-screen demo.
 - Use the full bank for the *batch processing* story (described off-stage, not scored live).
 
-See the [`cv-scoring` skill](../../../.claude/skills/cv-scoring/SKILL.md) for the scoring method and the fairness/vigilance reflexes.
+See the [`cv-scoring` skill](../../../../.claude/skills/cv-scoring/SKILL.md) for the scoring method and the [`pdf-reading` skill](../../../../.claude/skills/pdf-reading/SKILL.md) for reading the PDFs.

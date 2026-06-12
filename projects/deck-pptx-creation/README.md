@@ -9,6 +9,7 @@
 - `sample.deck.json` — a ready-to-render example spec.
 - Skill: [`deck-builder`](../../.claude/skills/deck-builder/SKILL.md).
 - Renderer: `npm run build:deck -- <deck.json>` (uses `pptxgenjs`). Generated decks land in `output/`.
+- **Capgemini branding:** [`brand/capgemini-brand.md`](brand/capgemini-brand.md) — the brand palette & fonts (Capgemini Blue `#0070AD`, Vibrant Blue `#12ABDB`, Verdana), transcribed from Capgemini's official 2017 brand guidelines. *(The full 45 MB brand PDF is not bundled — these tokens are what the deck theme needs.)*
 
 ## 80/20 path
 

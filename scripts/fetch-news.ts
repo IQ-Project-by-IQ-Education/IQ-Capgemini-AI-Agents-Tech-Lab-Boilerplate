@@ -7,7 +7,7 @@
  * Prefers Tavily (orientated for agents, news freshness), falls back to NewsAPI.
  * Keys are read from .env — if none is set, the script explains what's missing
  * instead of failing silently. Claude Code can also just search the web directly;
- * this script exists so the same fetch is reproducible inside the n8n routine.
+ * this script exists so the same fetch is reproducible and easy to re-run.
  */
 
 import { loadEnv, requireQuery, type NewsItem } from "./_shared.js";

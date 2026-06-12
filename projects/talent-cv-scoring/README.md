@@ -19,7 +19,7 @@
 4. **Start with a sample** of the bank — score ~8–10 CVs from `cvs-bank/` (don't try all 116 live), writing the scorecard to `output/`. Scale up once the grid is solid.
 5. Review the **vigilance & fairness** section together — this is the part you demo.
 
-> ⏱️ **Time tip:** 116 PDFs is a database, not a live demo. Score a curated sample on screen; mention the routine (n8n) as how you'd run the full bank off-stage.
+> ⏱️ **Time tip:** 116 PDFs is a database, not a live demo. Score a curated sample on screen; describe a batch run as how you'd process the full bank off-stage.
 
 ## Demo angle
 
@@ -28,7 +28,6 @@ A shortlist of CVs scored and ranked **live** against a job description, with th
 ## Stretch (only if finished)
 
 - Score a **larger batch** from `cvs-bank/` and produce a ranked top-10 for one job.
-- Wire a routine in [`n8n/`](../../n8n) so a new CV dropped in a folder gets auto-scored.
 - Feed the shortlist into the **Deck** project to generate a hiring-readout deck.
 
 ## Watch out

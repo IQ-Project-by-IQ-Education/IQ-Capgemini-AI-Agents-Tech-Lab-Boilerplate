@@ -25,8 +25,9 @@ Today's press briefing, generated **live** on screen — immediate and visual.
 
 ## Stretch (only if finished)
 
-- Schedule it: adapt [`n8n/`](../../n8n) so the briefing is generated every morning automatically.
+- Make it re-runnable: a clean `fetch:news` → synthesize flow you could trigger every morning.
 - Add a second language version of the TL;DR.
+- Feed the briefing into the **Deck** project to turn it into a slide.
 
 ## Watch out
 

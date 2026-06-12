@@ -40,7 +40,7 @@ You're building a prototype *with production reflexes* — knowing what would ne
 - [ ] Does it actually run end-to-end, reproducibly?
 - [ ] Is every external claim sourced?
 - [ ] Any sensitive data in the output? Handled appropriately?
-- [ ] Could someone else re-run it (n8n routine, clear inputs)?
+- [ ] Could someone else re-run it (clear inputs, reproducible steps)?
 - [ ] Have you said out loud what its limits are?
 
 ## The vocabulary we use

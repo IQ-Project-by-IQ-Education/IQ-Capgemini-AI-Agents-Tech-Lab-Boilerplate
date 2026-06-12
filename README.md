@@ -11,7 +11,7 @@ You will leave this lab with **a functional agent project**, not a slide deck. P
 - **Time budget:** 45 min framing · 2h15 build.
 - **Primary agent:** [Claude Code](https://www.anthropic.com/claude-code) (Claude Opus / Sonnet 4.6).
 - **Mindset:** *A finished project beats an impressive but incomplete one.* This is **production thinking** — not "vibe coding". You care about data, security, quality, maintainability, and knowing the limits of the tools.
-- **Reliability layer:** wire your agent into a **minimal n8n workflow** so it runs as a repeatable routine.
+- **Reproducible, not one-off:** structure your agent so it can re-run reliably with clear inputs — production thinking, not a one-shot demo.
 
 ---
 
@@ -79,7 +79,6 @@ Both come from the official marketplace `anthropics/claude-plugins-official`. If
 │   ├── radar-press-synthesis/
 │   └── deck-pptx-creation/
 ├── scripts/                   # TypeScript helpers (news fetch / deck render)
-├── n8n/                       # Minimal workflow to adapt — agent ↔ routine
 └── docs/
     └── good-practices.md      # The production reflexes we voice-over during the build
 ```

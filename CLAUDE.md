@@ -25,13 +25,9 @@ Use them when the task matches. They define the expected output shape so results
 
 ## Tooling
 
-- **News freshness:** `scripts/fetch-news.ts` (Tavily / NewsAPI). Run with `npm run fetch:news -- "<query>"`. Reads keys from `.env`; if none is set, it explains what's missing instead of failing silently. Prefer your own web search/fetch when it's faster — the script exists so the fetch is reproducible inside n8n.
+- **News freshness:** `scripts/fetch-news.ts` (Tavily / NewsAPI). Run with `npm run fetch:news -- "<query>"`. Reads keys from `.env`; if none is set, it explains what's missing instead of failing silently. Prefer your own web search/fetch when it's faster — the script exists so the fetch is reproducible and easy to re-run.
 - **Deck rendering:** `scripts/build-deck.ts` (pptxgenjs). Run with `npm run build:deck -- <deck.json> [out.pptx]`. You write the content as a JSON deck spec; the script renders the house theme.
 - **CV scoring:** Claude reads the `cvs-bank/` PDFs directly — no script needed. For a live demo, sample ~8–10 PDFs rather than all 116.
-
-## Reliability layer (n8n)
-
-`n8n/agent-routine.workflow.json` is a **minimal template to adapt**, not to build from scratch. The point is to show how the agent becomes a **scheduled, repeatable routine** (e.g. "the daily briefing lands every morning"). Help the participant adapt it; don't rebuild n8n.
 
 ## Output conventions
 

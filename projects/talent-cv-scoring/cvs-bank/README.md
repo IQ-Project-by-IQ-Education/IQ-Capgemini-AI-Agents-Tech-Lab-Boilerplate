@@ -7,7 +7,7 @@ A database of **116 public, anonymized CVs in PDF** — the main data source for
 These are proxy CVs for the lab (public/anonymized). Claude Code can read the PDFs directly:
 
 - **Don't score all 116 live** — pick a sample of ~8–10 for the on-screen demo.
-- Use the full bank for the *batch / routine* story (see [`n8n/`](../../../n8n)).
+- Use the full bank for the *batch processing* story (described off-stage, not scored live).
 
 ## Source & data handling
 

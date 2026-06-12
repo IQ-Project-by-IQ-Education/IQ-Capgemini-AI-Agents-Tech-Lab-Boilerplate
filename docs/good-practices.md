@@ -1,6 +1,6 @@
 # Good practices — the production reflexes
 
-Voice-over material for the build, not a lecture. The goal: leave with the reflexes that separate *a demo* from *something you'd actually run*. We talk **production, security, quality, and limits** — not "vibe coding".
+Voice-over material for the build, not a lecture. The goal: leave with the reflexes that separate _a demo_ from _something you'd actually run_. We talk **production, security, quality, and limits** — not "vibe coding".
 
 ## The one rule
 
@@ -8,14 +8,14 @@ Voice-over material for the build, not a lecture. The goal: leave with the refle
 
 ## Prototype vs. production
 
-| | Personal prototype | Industrializable project |
-| --- | --- | --- |
-| Data | Whatever's handy | Sourced, owned, compliant |
-| Output | One-off | Repeatable, consistent format |
-| Failure | Re-run by hand | Handled, logged, alerted |
-| Trust | "Looks right" | Verified against sources |
+|         | Personal prototype | Industrializable project      |
+| ------- | ------------------ | ----------------------------- |
+| Data    | Whatever's handy   | Sourced, owned, compliant     |
+| Output  | One-off            | Repeatable, consistent format |
+| Failure | Re-run by hand     | Handled, logged, alerted      |
+| Trust   | "Looks right"      | Verified against sources      |
 
-You're building a prototype *with production reflexes* — knowing what would need to harden for the right column.
+You're building a prototype _with production reflexes_ — knowing what would need to harden for the right column.
 
 ## Data & security reflexes
 
@@ -33,7 +33,7 @@ You're building a prototype *with production reflexes* — knowing what would ne
 
 - The model is a capable assistant, not an oracle. It can be confidently wrong.
 - It only knows what it was given or fetched — context engineering matters as much as prompting.
-- High-stakes decisions (hiring, strategy) stay with a human; the agent is decision *support*.
+- High-stakes decisions (hiring, strategy) stay with a human; the agent is decision _support_.
 
 ## Before you ship / share — checklist
 
@@ -45,4 +45,4 @@ You're building a prototype *with production reflexes* — knowing what would ne
 
 ## The vocabulary we use
 
-Prompt engineering · context engineering · agents · instructions · skills. We frame the work as **building reliable agents**, deliberately avoiding "vibe coding".
+Prompt engineering · context engineering · agents · instructions · skills. We frame the work as **building reliable agents**.

@@ -50,13 +50,26 @@ The repo ships with three **skills** under `.claude/skills/` — Claude Code loa
 
 ---
 
+## Plugins (auto-enabled)
+
+This repo declares two Claude Code plugins in `.claude/settings.json`. The **first time you trust this folder**, Claude Code will prompt you to install them — accept:
+
+| Plugin | What it brings |
+| --- | --- |
+| **superpowers** | A disciplined way of working — brainstorming, planning, systematic debugging, and reusable skills. Use it to scope your project well before building. |
+| **frontend-design** | Production-grade, non-generic UI generation. Use it when you want to present results as a polished HTML dashboard or web view instead of raw Markdown. |
+
+Both come from the official marketplace `anthropics/claude-plugins-official`. If the prompt doesn't appear, run `/plugin` and enable `superpowers` and `frontend-design`.
+
+---
+
 ## Repository layout
 
 ```
 .
 ├── CLAUDE.md                  # Project context Claude Code reads on every session
 ├── .claude/
-│   ├── settings.json          # Permissions for the lab (web, scripts)
+│   ├── settings.json          # Plugins (superpowers, frontend-design) + permissions
 │   └── skills/                # Reusable house-style skills
 │       ├── cv-scoring/
 │       ├── press-synthesis/

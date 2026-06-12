@@ -61,6 +61,25 @@ This repo declares two Claude Code plugins in `.claude/settings.json`. The **fir
 
 Both come from the official marketplace `anthropics/claude-plugins-official`. If the prompt doesn't appear, run `/plugin` and enable `superpowers` and `frontend-design`.
 
+> The lab's **core works without the plugins** — the three skills under `.claude/skills/` are local to this repo and always available. The plugins are an enhancement; if your network can't reach the GitHub marketplace, you can still run all three projects.
+
+---
+
+## Network & data — for IT review
+
+What this repo needs to reach the network, and what stays local:
+
+| Capability | Network needed? | Notes |
+| --- | --- | --- |
+| `npm install` | Yes, once | npm registry. Pinned via `package-lock.json`. Deps: `pptxgenjs`, `tsx`, `typescript`, `@types/node` (0 known vulnerabilities). |
+| Claude Code itself | Yes | `api.anthropic.com` — the agent engine. |
+| **Deck** project | **No** (offline) | Renders `.pptx` fully locally via `pptxgenjs`. |
+| **Talent** project | **No** for data | CVs are local PDFs read on-device. Scoring is done by Claude. |
+| **Radar** project | Yes | Public news (Tavily / NewsAPI, or Claude's web search). |
+| Plugins (optional) | Yes | GitHub marketplace `anthropics/claude-plugins-official`. |
+
+**Data handling:** all data in this repo is **public or synthetic**. The `cvs-bank/` PDFs are a public, anonymized résumé dataset (PII redacted — see its [README](projects/talent-cv-scoring/cvs-bank/README.md)); job descriptions and proxy CVs are synthetic. **No real or internal Capgemini data is included.** No secrets are committed (`.env` is git-ignored; only `.env.example` with empty placeholders ships).
+
 ---
 
 ## Repository layout

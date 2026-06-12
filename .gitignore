@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Env & secrets
+.env
+.env.local
+*.local
+
+# Build / cache
+dist/
+.cache/
+*.tsbuildinfo
+
+# Agent outputs (kept local; the folder is tracked via .gitkeep, contents are not)
+projects/*/output/*
+!projects/*/output/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+*.swp

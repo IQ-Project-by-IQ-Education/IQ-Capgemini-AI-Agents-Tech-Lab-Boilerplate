@@ -1,0 +1,82 @@
+# Lab 3 — AI Agents Tech · Capgemini COMEX
+
+> **Build a working AI agent in one morning.** Starter repository for the *AI Agents Tech* lab — Capgemini COMEX, June 18th 2026.
+
+You will leave this lab with **a functional agent project**, not a slide deck. Pick one of the three use cases below, follow the 80/20 method, and ship something that actually runs.
+
+---
+
+## The deal
+
+- **Time budget:** 45 min framing · 2h15 build.
+- **Primary agent:** [Claude Code](https://www.anthropic.com/claude-code) (Claude Opus / Sonnet 4.6).
+- **Mindset:** *A finished project beats an impressive but incomplete one.* This is **production thinking** — not "vibe coding". You care about data, security, quality, maintainability, and knowing the limits of the tools.
+- **Reliability layer:** wire your agent into a **minimal n8n workflow** so it runs as a repeatable routine.
+
+---
+
+## Pick your project
+
+Each project is self-contained under `projects/`. Start by reading its `README.md`.
+
+| Project | Folder | What you build | Data |
+| --- | --- | --- | --- |
+| **Talent** — CV scoring | [`projects/talent-cv-scoring`](projects/talent-cv-scoring) | Score & rank CVs against a job description, with motivated criteria | Anonymized proxy CVs (provided) |
+| **Radar** — Press synthesis ⭐ | [`projects/radar-press-synthesis`](projects/radar-press-synthesis) | Daily executive briefing of business & tech news, filtered on themes | Public news (Tavily / RSS) |
+| **Deck** — Professional PPTX | [`projects/deck-pptx-creation`](projects/deck-pptx-creation) | Turn content into a clean, executive-ready PowerPoint deck | Your notes / another agent's output |
+
+⭐ = **safety-net project**: demonstrable end-to-end with public data, no internal Capgemini data required.
+
+---
+
+## Quick start
+
+```bash
+# 1. Install tooling (Node 20+)
+npm install
+
+# 2. Configure API keys (optional — only for the news/web fetch scripts)
+cp .env.example .env
+#   then fill in TAVILY_API_KEY / EXA_API_KEY / NEWSAPI_KEY
+
+# 3. Open the repo with Claude Code
+claude
+
+# 4. Inside Claude Code, tell it which project you picked, e.g.:
+#    "Let's build the Radar press-synthesis project. Read its README and the skill, then start."
+```
+
+The repo ships with three **skills** under `.claude/skills/` — Claude Code loads them automatically and uses them when relevant. They encode the "house style" for scoring grids, press synthesis, and deck building.
+
+---
+
+## Repository layout
+
+```
+.
+├── CLAUDE.md                  # Project context Claude Code reads on every session
+├── .claude/
+│   ├── settings.json          # Permissions for the lab (web, scripts)
+│   └── skills/                # Reusable house-style skills
+│       ├── cv-scoring/
+│       ├── press-synthesis/
+│       └── deck-builder/
+├── projects/                  # Pick ONE — each is a self-contained brief
+│   ├── talent-cv-scoring/
+│   ├── radar-press-synthesis/
+│   └── deck-pptx-creation/
+├── scripts/                   # TypeScript helpers (news fetch / deck render)
+├── n8n/                       # Minimal workflow to adapt — agent ↔ routine
+└── docs/
+    └── good-practices.md      # The production reflexes we voice-over during the build
+```
+
+---
+
+## Before you ship
+
+Read [`docs/good-practices.md`](docs/good-practices.md). The one-page checklist on data, security and "is this production?" is the difference between a demo and something you'd actually run.
+
+---
+
+*Lab team: Louis (lead) · Nathan · Arnaud — IQ for Capgemini.*

@@ -1,0 +1,23 @@
+{
+  "name": "lab3-agentic-capgemini",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Starter for Lab 3 — AI Agents Tech (Capgemini COMEX). Build a working Claude Code agent on one of three use cases.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "fetch:news": "tsx scripts/fetch-news.ts",
+    "build:deck": "tsx scripts/build-deck.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2"
+  }
+}

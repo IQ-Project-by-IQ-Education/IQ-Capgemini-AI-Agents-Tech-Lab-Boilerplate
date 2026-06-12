@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "WebSearch",
+      "WebFetch",
+      "Bash(npm run fetch:news:*)",
+      "Bash(npm run build:deck:*)",
+      "Bash(npm install)",
+      "Bash(npm run typecheck)"
+    ]
+  }
+}

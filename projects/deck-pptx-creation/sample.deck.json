@@ -1,0 +1,24 @@
+{
+  "title": "AI Agents in Practice",
+  "subtitle": "From prototype to a reliable routine",
+  "author": "Capgemini Lab 3",
+  "slides": [
+    { "type": "title", "title": "AI Agents in Practice", "subtitle": "From a working prototype to a production routine" },
+    { "type": "section", "title": "Part 1 — The shift" },
+    {
+      "type": "two-column",
+      "title": "Before / After",
+      "leftTitle": "Before",
+      "left": ["Manual, one-off analysis", "Hours per briefing", "Inconsistent quality", "Hard to repeat"],
+      "rightTitle": "After",
+      "right": ["Agent-built in minutes", "Sourced and structured", "Consistent house style", "Runs on a schedule"]
+    },
+    {
+      "type": "bullets",
+      "title": "What we built today",
+      "bullets": ["A working agent on a real use case", "Public, sourced data — no leaks", "House-style output via skills", "Wired into an n8n routine"]
+    },
+    { "type": "quote", "text": "A finished project beats an impressive but incomplete one.", "attribution": "Lab 3 — house rule" },
+    { "type": "closing", "title": "Your move", "subtitle": "Pick one use case · ship it · make it a routine" }
+  ]
+}

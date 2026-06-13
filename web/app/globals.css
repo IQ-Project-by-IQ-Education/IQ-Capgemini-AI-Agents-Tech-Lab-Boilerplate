@@ -1,0 +1,309 @@
+/* Capgemini brand tokens (from projects/3-deck-pptx-creation/brand/capgemini-brand.md).
+   Kept deliberately plain — the live demo moment is asking frontend-design to elevate it. */
+:root {
+  --cap-blue: #0070ad;
+  --cap-vibrant: #12abdb;
+  --cap-purple: #2b0a3d;
+  --cap-gray: #ececec;
+  --ink: #1a1a1a;
+  --muted: #5b6470;
+  --white: #ffffff;
+  --radius: 10px;
+  --maxw: 920px;
+  --font: "Ubuntu", Verdana, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 3px solid var(--cap-blue);
+  flex-wrap: wrap;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--cap-purple);
+}
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--cap-blue), var(--cap-vibrant));
+  display: inline-block;
+}
+.brand-text {
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+.brand-sub {
+  color: var(--cap-vibrant);
+  font-weight: 700;
+}
+.site-nav {
+  display: flex;
+  gap: 1.25rem;
+}
+.site-nav a {
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 600;
+  padding: 0.2rem 0;
+  border-bottom: 2px solid transparent;
+}
+.site-nav a:hover {
+  color: var(--cap-blue);
+  border-bottom-color: var(--cap-vibrant);
+}
+
+/* Main + footer */
+.site-main {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+.site-footer {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 1.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--cap-gray);
+}
+.site-footer code {
+  background: var(--cap-gray);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+
+/* Landing hero + cards */
+.hero h1 {
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.4rem;
+  color: var(--cap-purple);
+}
+.hero p {
+  color: var(--muted);
+  margin: 0 0 2rem;
+  max-width: 40rem;
+}
+.card-grid {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--cap-gray);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  transition: border-color 0.15s, transform 0.15s;
+  background: var(--white);
+}
+.card:hover {
+  border-color: var(--cap-vibrant);
+  transform: translateY(-2px);
+}
+.card .tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cap-vibrant);
+  margin-bottom: 0.5rem;
+}
+.card h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+  color: var(--cap-blue);
+}
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* Document view (rendered markdown) */
+.page-head {
+  margin-bottom: 1.5rem;
+}
+.page-head .tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cap-vibrant);
+}
+.page-head h1 {
+  margin: 0.3rem 0 0.2rem;
+  color: var(--cap-purple);
+  letter-spacing: -0.01em;
+}
+.page-head .source {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.doc {
+  border: 1px solid var(--cap-gray);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.8rem;
+}
+.doc h1,
+.doc h2,
+.doc h3 {
+  color: var(--cap-purple);
+  letter-spacing: -0.01em;
+}
+.doc h2 {
+  border-bottom: 2px solid var(--cap-gray);
+  padding-bottom: 0.3rem;
+  margin-top: 1.8rem;
+}
+.doc a {
+  color: var(--cap-blue);
+}
+.doc code {
+  background: var(--cap-gray);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.doc blockquote {
+  border-left: 3px solid var(--cap-vibrant);
+  margin: 1rem 0;
+  padding: 0.2rem 1rem;
+  color: var(--muted);
+}
+.doc table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.doc th,
+.doc td {
+  border: 1px solid var(--cap-gray);
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+.doc th {
+  background: var(--cap-blue);
+  color: var(--white);
+  font-weight: 600;
+}
+.doc tbody tr:nth-child(even) {
+  background: #f7f9fb;
+}
+
+/* Empty state */
+.empty {
+  border: 1px dashed var(--cap-vibrant);
+  border-radius: var(--radius);
+  padding: 2rem;
+  color: var(--muted);
+  background: #f7fbfd;
+}
+.empty code {
+  background: var(--cap-gray);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  color: var(--ink);
+}
+
+/* Deck slide cards */
+.slide-list {
+  display: grid;
+  gap: 0.8rem;
+}
+.slide {
+  border: 1px solid var(--cap-gray);
+  border-left: 4px solid var(--cap-vibrant);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+}
+.slide .stype {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cap-vibrant);
+  font-weight: 700;
+}
+.slide h3 {
+  margin: 0.2rem 0;
+  color: var(--cap-purple);
+}
+.file-row {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--cap-gray);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 0.5rem;
+}
+.file-row .size {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Recent runs panel */
+.runs {
+  margin-top: 2.5rem;
+}
+.runs h2 {
+  color: var(--cap-purple);
+  font-size: 1.05rem;
+  border-bottom: 1px solid var(--cap-gray);
+  padding-bottom: 0.3rem;
+}
+.runs table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.85rem;
+}
+.runs th,
+.runs td {
+  border-bottom: 1px solid var(--cap-gray);
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+.runs th {
+  color: var(--cap-vibrant);
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+}
+.runs td:first-child {
+  white-space: nowrap;
+  color: var(--muted);
+}

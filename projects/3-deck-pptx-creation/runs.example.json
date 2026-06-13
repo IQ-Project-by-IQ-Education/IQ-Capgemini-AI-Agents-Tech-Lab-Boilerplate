@@ -1,0 +1,8 @@
+[
+  {
+    "ts": "2026-06-18T11:05:00Z",
+    "input": "Today's Radar briefing → executive deck",
+    "output": "output/exec-briefing.pptx",
+    "result": "7 slides rendered in the Capgemini house theme"
+  }
+]

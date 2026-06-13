@@ -11,7 +11,11 @@
     "fetch:news": "tsx scripts/fetch-news.ts",
     "build:deck": "tsx scripts/build-deck.ts",
     "read:pdf": "node scripts/read-pdf.mjs",
-    "typecheck": "tsc --noEmit"
+    "log:run": "node scripts/log-run.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node tests/verify.mjs",
+    "web:dev": "npm --prefix web run dev",
+    "web:build": "npm --prefix web run build"
   },
   "dependencies": {
     "pdfjs-dist": "^4.10.38",

@@ -7,7 +7,7 @@
 ## What's provided
 
 - **`data/cvs/`** — a database of **116 public, anonymized CVs in PDF** (the main data source), plus 3 tiny markdown CVs (`candidate-*.md`) for a quick smoke test. Provenance: `data/cvs/README.md`.
-- `data/jobs/` — sample job descriptions to score against.
+- `data/jobs/` — sample job descriptions to score against. **Data-matched default:** the CV bank is all sales résumés, so use `data/jobs/sales-account-executive.md` for the cleanest demo (the other JDs will score sales CVs against off-role criteria).
 - Skill: [`cv-scoring`](../../.claude/skills/cv-scoring/SKILL.md) — Claude Code uses it automatically.
 - Skill: [`pdf-reading`](../../.claude/skills/pdf-reading/SKILL.md) + `npm run read:pdf -- <file>` — reads the CV PDFs on-device, **standalone** (no network, no Python).
 

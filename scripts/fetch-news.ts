@@ -84,7 +84,9 @@ async function main() {
       "  Alternatively, ask Claude Code to search the web directly — no key needed.",
     ].join("\n"),
   );
-  process.exit(1);
+  // No key is the lab's expected default (keys are optional) — exit 0 with guidance,
+  // not as a failure. A real fetch error below still exits non-zero.
+  process.exit(0);
 }
 
 function print(items: NewsItem[]) {

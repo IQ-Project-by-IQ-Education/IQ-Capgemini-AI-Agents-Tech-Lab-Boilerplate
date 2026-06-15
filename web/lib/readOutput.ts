@@ -10,6 +10,8 @@ export type OutputFile = {
   fullPath: string;
   /** Size in bytes. */
   size: number;
+  /** Last-modified time (ms since epoch) — used to pick the newest output. */
+  mtimeMs: number;
 };
 
 /** List files in a project's output/ folder matching any of the given extensions. */
@@ -28,19 +30,21 @@ export async function listOutputs(projectDir: string, exts: string[]): Promise<O
     matches.sort().map(async (name) => {
       const fullPath = path.join(dir, name);
       const stat = await fs.stat(fullPath);
-      return { name, fullPath, size: stat.size };
+      return { name, fullPath, size: stat.size, mtimeMs: stat.mtimeMs };
     }),
   );
   return files;
 }
 
-/** Read the most recent markdown file in a project's output/ (by filename sort). */
+/** Read the most recently modified markdown file in a project's output/. */
 export async function readLatestMarkdown(
   projectDir: string,
 ): Promise<{ name: string; content: string } | null> {
   const files = await listOutputs(projectDir, [".md", ".markdown"]);
   if (files.length === 0) return null;
-  const latest = files[files.length - 1]; // date-suffixed names sort chronologically
+  // Pick the newest by mtime, not by name — a `_smoke-*` file must not shadow
+  // the real latest output just because it sorts later alphabetically.
+  const latest = files.reduce((a, b) => (b.mtimeMs > a.mtimeMs ? b : a));
   const content = await fs.readFile(latest.fullPath, "utf8");
   return { name: latest.name, content };
 }

@@ -51,7 +51,7 @@ and `knowledge-work-legal/` (the Anthropic legal-skill prose behind `nda-analysi
 
 - **News freshness:** `scripts/fetch-news.ts` (Tavily / NewsAPI). Run with `npm run fetch:news -- "<query>"`. Reads keys from `.env`; if none is set, it explains what's missing instead of failing silently. Prefer your own web search/fetch when it's faster — the script exists so the fetch is reproducible and easy to re-run.
 - **Deck rendering:** `scripts/build-deck.ts` (pptxgenjs). Run with `npm run build:deck -- <deck.json> [out.pptx]`. You write the content as a JSON deck spec; the script renders the house theme.
-- **PDF reading:** `scripts/read-pdf.mjs` (pdf.js, pure JS, no native deps). Run with `npm run read:pdf -- <file.pdf>`. Use it for CVs (`projects/talent-cv-scoring/data/cvs/*.pdf`) or any reference PDF a participant brings. Native PDF reading works too; the script is the standalone guarantee. For a live CV demo, sample ~8–10 rather than all 116.
+- **PDF reading:** `scripts/read-pdf.mjs` (pdf.js, pure JS, no native deps). Run with `npm run read:pdf -- <file.pdf>`. Use it for CVs (`projects/1-talent-cv-scoring/data/cvs/*.pdf`) or any reference PDF a participant brings. Native PDF reading works too; the script is the standalone guarantee. For a live CV demo, sample ~8–10 rather than all 116.
 
 ## Output conventions
 

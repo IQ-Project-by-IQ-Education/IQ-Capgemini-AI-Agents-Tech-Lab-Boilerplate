@@ -11,7 +11,7 @@ Produce a **presentable .pptx** by writing the *story* as a structured spec and 
 
 1. **Pin the brief.** Audience, goal, and length (executive decks: 6–12 slides). Lead with the "so what".
 2. **Write the deck spec** as JSON at `output/<name>.deck.json` following the schema below. Keep bullets short (max ~12 words), one idea per bullet, 3–6 bullets per slide.
-3. **Render it:** `npm run build:deck -- projects/deck-pptx-creation/output/<name>.deck.json`
+3. **Render it:** `npm run build:deck -- projects/3-deck-pptx-creation/output/<name>.deck.json`
 4. **Review on screen**, iterate on the JSON (not the rendered file), re-render. The JSON is the source of truth.
 
 ## Deck spec schema
@@ -21,6 +21,7 @@ Produce a **presentable .pptx** by writing the *story* as a structured spec and 
   "title": "Deck title",
   "subtitle": "One-line framing",
   "author": "Name / team",
+  "theme": "capgemini",
   "slides": [
     { "type": "title", "title": "...", "subtitle": "..." },
     { "type": "section", "title": "Part 1 — ..." },
@@ -34,15 +35,28 @@ Produce a **presentable .pptx** by writing the *story* as a structured spec and 
 
 Slide types: `title`, `section`, `bullets`, `two-column`, `quote`, `closing`. Start with `title`, use `section` dividers for structure, end with `closing`.
 
+The optional **`theme`** field (top level) brands the deck. It is either a **preset name**
+(string) or an **inline object** that overrides only the tokens you name:
+
+```json
+"theme": "capgemini"
+"theme": { "accent": "12ABDB", "font": "Verdana" }
+```
+
+Omit it for the default house theme. Built-in presets: `capgemini`. Override-able tokens:
+`accent`, `ink`, `white`, `light`, `font` (plus `muted`).
+
 ## House style (enforced by the renderer)
 
-- Consistent theme: deep-ink cover/closing, accent blue, clean white content slides, 16:9.
-- You don't set colors or positions — focus on words. The renderer handles layout.
+- Default theme: deep-ink cover/closing, accent blue, clean white content slides, 16:9.
+- You don't set positions — focus on words. The renderer handles layout. Colors/font come
+  from the default house theme unless the spec sets `theme`.
 
 ## Capgemini branding
 
-For a Capgemini-branded deck, follow the brand tokens in
-`projects/deck-pptx-creation/brand/capgemini-brand.md` (palette: Capgemini Blue
+For a Capgemini-branded deck, set `"theme": "capgemini"` in the spec — the renderer then
+applies the brand tokens from
+`projects/3-deck-pptx-creation/brand/capgemini-brand.md` (palette: Capgemini Blue
 `#0070AD`, Vibrant Blue `#12ABDB`; font: Verdana as the Ubuntu-compatible fallback).
 Those tokens are transcribed from Capgemini's official 2017 brand guidelines. (The
 full brand PDF isn't bundled; the tokens are what the renderer needs. If a participant

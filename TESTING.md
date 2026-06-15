@@ -82,6 +82,7 @@ Open this folder in Claude Code and ask, in plain language:
 | Symptom | Fix |
 | --- | --- |
 | `npm: command not found` / Node too old | Install Node 20+ (22+ recommended). `node -v` to check. |
+| `node`/`npm` "command not found" or no-ops under **nvm** | nvm defines `node`/`npm` as shell functions that don't resolve in a non-login/automation shell. Call the binaries by absolute path (e.g. `~/.nvm/versions/node/<ver>/bin/npm`) or run from an interactive/login shell. |
 | Self-test fails on **Dependencies** | Run `npm install` at the repo root. |
 | Self-test **warns** “web deps not installed” | Run `npm --prefix web install`. (Warning only — still exit 0.) |
 | Self-test fails on **web app build** | Re-run `npm --prefix web install`, then `npm test`. Share the 4 lines it printed. |

@@ -15,6 +15,10 @@ Turn a pile of news into a **2-minute executive read**: what happened, why it ma
 4. **Synthesize per theme**: 1–2 sentences on *what happened* + 1 sentence on *why it matters / so what*. Cite the source inline.
 5. **Lead with a TL;DR** — the 3 things an executive must know.
 
+**Length budget:** keep the body **≤ ~500 words** (a 2–3 min read) — TL;DR + 3–6 themes,
+each 1–2 lines. This makes "skimmable" an objective check: if it runs long, cut themes or
+tighten lines rather than adding more. Brevity is the deliverable.
+
 ## Output format
 
 ```markdown

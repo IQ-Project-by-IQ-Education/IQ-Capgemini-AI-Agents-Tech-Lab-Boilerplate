@@ -18,6 +18,8 @@ interface DeckSpec {
   title: string;
   subtitle?: string;
   author?: string;
+  /** Optional theme: a preset name (e.g. "capgemini") or an inline partial override of the default tokens. */
+  theme?: string | Partial<Theme>;
   slides: Slide[];
 }
 
@@ -30,7 +32,18 @@ type Slide =
   | { type: "closing"; title: string; subtitle?: string };
 
 // --- House theme ----------------------------------------------------------
-const THEME = {
+interface Theme {
+  ink: string;
+  accent: string;
+  muted: string;
+  light: string;
+  white: string;
+  font: string;
+}
+
+// Default house theme — generic, shared across client decks. Do NOT change this:
+// branding is opt-in via the spec-level `theme` field (a preset name or partial override).
+const DEFAULT_THEME: Theme = {
   ink: "1A2233",
   accent: "0B5FFF",
   muted: "5B6472",
@@ -39,8 +52,71 @@ const THEME = {
   font: "Arial",
 };
 
+// Built-in theme presets, selectable by name from a deck spec's `theme` field.
+// `capgemini` maps the brand tokens (see projects/3-deck-pptx-creation/brand/capgemini-brand.md):
+// Capgemini Blue #0070AD on covers/sections, Vibrant Blue #12ABDB as the accent, Verdana font.
+const PRESETS: Record<string, Partial<Theme>> = {
+  capgemini: {
+    ink: "0070AD", // Capgemini Blue — cover / section / closing background
+    accent: "12ABDB", // Vibrant Blue — accent bars / highlights
+    muted: "5B6472",
+    light: "ECECEC", // Cool Grey 1 — light panels
+    white: "FFFFFF",
+    font: "Verdana", // Ubuntu-compatible fallback for portable .pptx
+  },
+};
+
+/** Resolve a spec's optional `theme` (preset name or inline partial) into a full Theme. */
+function resolveTheme(theme: DeckSpec["theme"]): Theme {
+  if (!theme) return DEFAULT_THEME;
+  if (typeof theme === "string") {
+    const preset = PRESETS[theme];
+    if (!preset) {
+      throw new Error(
+        `Unknown theme preset "${theme}". Available: ${Object.keys(PRESETS).join(", ")}, or pass an inline theme object.`,
+      );
+    }
+    return { ...DEFAULT_THEME, ...preset };
+  }
+  return { ...DEFAULT_THEME, ...theme };
+}
+
+const SLIDE_TYPES = ["title", "section", "bullets", "two-column", "quote", "closing"] as const;
+
 function isSlide(s: unknown): s is Slide {
   return !!s && typeof s === "object" && typeof (s as { type?: unknown }).type === "string";
+}
+
+function nonEmptyStringArray(v: unknown): v is string[] {
+  return Array.isArray(v) && v.length > 0 && v.every((x) => typeof x === "string" && x.length > 0);
+}
+
+/** Validate a single slide's payload by type. Throws a readable error naming the slide index. */
+function validateSlide(s: Slide, i: number): void {
+  const where = `Slide #${i} (type "${s.type}")`;
+  if (!(SLIDE_TYPES as readonly string[]).includes(s.type)) {
+    throw new Error(`${where} has an unknown type. Allowed: ${SLIDE_TYPES.join(", ")}.`);
+  }
+  switch (s.type) {
+    case "bullets":
+      if (!nonEmptyStringArray((s as { bullets?: unknown }).bullets))
+        throw new Error(`${where} must have a non-empty \`bullets\` array of strings.`);
+      break;
+    case "two-column":
+      if (!nonEmptyStringArray((s as { left?: unknown }).left) || !nonEmptyStringArray((s as { right?: unknown }).right))
+        throw new Error(`${where} must have non-empty \`left\` and \`right\` arrays of strings.`);
+      break;
+    case "title":
+    case "section":
+    case "closing":
+      if (!(s as { title?: unknown }).title)
+        throw new Error(`${where} must have a \`title\`.`);
+      break;
+    case "quote":
+      if (!(s as { text?: unknown }).text)
+        throw new Error(`${where} must have a \`text\`.`);
+      break;
+  }
 }
 
 function loadSpec(path: string): DeckSpec {
@@ -50,11 +126,13 @@ function loadSpec(path: string): DeckSpec {
   }
   raw.slides.forEach((s, i) => {
     if (!isSlide(s)) throw new Error(`Slide #${i} is missing a valid \`type\`.`);
+    validateSlide(s, i);
   });
   return raw;
 }
 
 function render(spec: DeckSpec): PptxGenJS {
+  const THEME = resolveTheme(spec.theme);
   const pptx = new PptxGenJS();
   pptx.defineLayout({ name: "WIDE", width: 13.333, height: 7.5 });
   pptx.layout = "WIDE";
@@ -78,7 +156,7 @@ function render(spec: DeckSpec): PptxGenJS {
         break;
 
       case "bullets":
-        addHeader(pptx, s, slide.title);
+        addHeader(pptx, s, slide.title, THEME);
         s.addText(
           slide.bullets.map((b) => ({ text: b, options: { bullet: { indent: 18 }, breakLine: true } })),
           { x: 0.9, y: 1.8, w: 11.5, h: 4.8, fontSize: 18, color: THEME.ink, fontFace: THEME.font, valign: "top", lineSpacingMultiple: 1.3 },
@@ -86,7 +164,7 @@ function render(spec: DeckSpec): PptxGenJS {
         break;
 
       case "two-column": {
-        addHeader(pptx, s, slide.title);
+        addHeader(pptx, s, slide.title, THEME);
         const col = (x: number, title: string | undefined, items: string[]) => {
           if (title) s.addText(title, { x, y: 1.7, w: 5.6, h: 0.5, fontSize: 16, bold: true, color: THEME.accent, fontFace: THEME.font });
           s.addText(
@@ -117,7 +195,7 @@ function render(spec: DeckSpec): PptxGenJS {
   return pptx;
 }
 
-function addHeader(pptx: PptxGenJS, slide: PptxGenJS.Slide, title: string) {
+function addHeader(pptx: PptxGenJS, slide: PptxGenJS.Slide, title: string, THEME: Theme) {
   slide.background = { color: THEME.white };
   slide.addText(title, { x: 0.9, y: 0.6, w: 11.5, h: 0.9, fontSize: 26, bold: true, color: THEME.ink, fontFace: THEME.font });
   slide.addShape(pptx.ShapeType.rect, { x: 0.9, y: 1.55, w: 1.4, h: 0.06, fill: { color: THEME.accent } });

@@ -14,7 +14,7 @@ A database of **116 public, anonymized CVs in PDF** — the main data source for
 Read the PDFs on-device — natively, or with the bundled standalone extractor:
 
 ```bash
-npm run read:pdf -- projects/talent-cv-scoring/data/cvs/10138632.pdf
+npm run read:pdf -- projects/1-talent-cv-scoring/data/cvs/10138632.pdf
 ```
 
 - **Don't score all 116 live** — pick a sample of ~8–10 for the on-screen demo.

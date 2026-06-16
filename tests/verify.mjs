@@ -134,15 +134,19 @@ try {
 if (existsSync(rel("web/node_modules"))) {
   process.stdout.write("  … building the web app (~20s) … ");
   try {
-    execFileSync(process.platform === "win32" ? "npm.cmd" : "npm", ["run", "build"], {
+    // shell:true so a shell resolves `npm` → `npm.cmd` (via PATHEXT) on Windows. Modern Node
+    // (CVE-2024-27980 mitigation) refuses to execFile a .cmd/.bat without it and throws EINVAL.
+    execFileSync("npm", ["run", "build"], {
       cwd: rel("web"),
       stdio: ["ignore", "pipe", "pipe"],
+      shell: true,
     });
     console.log("\r  \x1b[32m✓\x1b[0m web app builds cleanly            ");
   } catch (e) {
     console.log("\r  \x1b[31m✗\x1b[0m web app build failed              ");
-    const out = String(e.stdout ?? "") + String(e.stderr ?? "");
-    console.log("    " + out.trim().split("\n").slice(-4).join("\n    "));
+    const out = (String(e.stdout ?? "") + String(e.stderr ?? "")).trim();
+    const detail = out || String(e.message ?? e);
+    console.log("    " + detail.split("\n").slice(-6).join("\n    "));
     failures++;
   }
 } else {

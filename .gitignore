@@ -31,3 +31,4 @@ projects/*/runs.json
 Thumbs.db
 .idea/
 *.swp
+*.code-workspace

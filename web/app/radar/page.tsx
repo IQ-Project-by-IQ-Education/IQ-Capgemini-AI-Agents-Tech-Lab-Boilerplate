@@ -20,7 +20,7 @@ export default async function RadarPage() {
         <article className="doc">{renderMarkdown(doc.content)}</article>
       ) : (
         <div className="empty">
-          <p>Nothing here yet — and that&apos;s normal.</p>
+          <p>Nothing here yet, and that&apos;s normal.</p>
           <p>
             Tell Claude Code: <strong>“quick start”</strong>. Answer three simple questions, and
             your press release and news briefing will appear right here. Then refresh this page.

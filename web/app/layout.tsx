@@ -4,7 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AI Agents Tech — Lab",
+  title: "AI Agents Tech Lab",
   description: "Front-end for the Capgemini AI-Agents lab. Renders each project's output.",
 };
 

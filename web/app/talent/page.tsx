@@ -20,10 +20,10 @@ export default async function TalentPage() {
         <article className="doc">{renderMarkdown(doc.content)}</article>
       ) : (
         <div className="empty">
-          <p>Nothing here yet — and that&apos;s normal.</p>
+          <p>Nothing here yet, and that&apos;s normal.</p>
           <p>
             This page fills up during the <strong>live CV-scoring demo</strong>: one agent
-            screens 20 CVs, argues its top 5, re-ranks after spoken feedback — and remembers
+            screens 20 CVs, argues its top 5, re-ranks after spoken feedback, and remembers
             your preferences for next time.
           </p>
         </div>

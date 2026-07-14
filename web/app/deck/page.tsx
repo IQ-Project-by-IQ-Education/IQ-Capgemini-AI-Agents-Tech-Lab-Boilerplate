@@ -26,7 +26,7 @@ export default async function DeckPage() {
 
       {!hasContent && (
         <div className="empty">
-          <p>Nothing here yet — and that&apos;s normal.</p>
+          <p>Nothing here yet, and that&apos;s normal.</p>
           <p>
             Tell Claude Code: <strong>“quick start”</strong>. Answer three simple questions, and
             your PowerPoint deck will appear right here. Then refresh this page.
@@ -44,8 +44,8 @@ export default async function DeckPage() {
             </div>
           ))}
           <p className="source" style={{ marginTop: "0.5rem" }}>
-            A PowerPoint file can&apos;t be previewed inline — ask Claude Code to open it for
-            you.
+            A PowerPoint file can&apos;t be previewed inline, so ask Claude Code to open it
+            for you.
           </p>
         </section>
       )}

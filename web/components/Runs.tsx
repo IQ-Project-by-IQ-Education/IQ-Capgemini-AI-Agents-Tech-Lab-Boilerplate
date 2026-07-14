@@ -17,9 +17,9 @@ export function Runs({ runs }: { runs: RunRecord[] }) {
         <tbody>
           {runs.slice(0, 10).map((r, i) => (
             <tr key={i}>
-              <td>{r.ts ? r.ts.replace("T", " ").replace(/:\d\dZ?$/, "") : "—"}</td>
-              <td>{r.input ?? "—"}</td>
-              <td>{r.result ?? "—"}</td>
+              <td>{r.ts ? r.ts.replace("T", " ").replace(/:\d\dZ?$/, "") : "·"}</td>
+              <td>{r.input ?? "·"}</td>
+              <td>{r.result ?? "·"}</td>
             </tr>
           ))}
         </tbody>

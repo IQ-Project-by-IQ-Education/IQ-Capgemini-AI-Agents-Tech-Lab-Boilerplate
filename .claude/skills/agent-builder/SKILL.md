@@ -11,7 +11,7 @@ Turn a participant's idea into a **working agent file** in `.claude/agents/`, th
 
 Ask **one question per message**, in plain language, no jargon. Cover:
 
-1. **The job**: "If this agent were a new hire, what's their job title and their one deliverable?" — if they have no idea or stall, switch to the **`quick-start`** skill (four simple questions, everything generated for them) and stop here; participants with a vague idea can also adopt a pre-defined agent (**cv-scorer** or **press-release**) as a base.
+1. **The job**: "If this agent were a new hire, what's their job title and their one deliverable?" — if they have no idea or stall, switch to the **`quick-start`** skill (three simple questions, everything generated for them) and stop here; participants with a vague idea can also adopt a pre-defined agent (**press-release** or **deck-maker**) as a base.
 2. **The inputs**: what does it read? (files they'll drop in the repo, public web info, the provided datasets…)
 3. **The output**: what does the deliverable look like, and who is it for? (a Markdown report, a shortlist, a briefing…)
 4. **The quality bar**: what makes a run *good*? What must it never do?
@@ -21,7 +21,7 @@ Don't ask about tools, models, or file formats — infer those yourself.
 
 ## Step 2 — Generate the agent file
 
-Write `.claude/agents/<kebab-name>.md` following this template (same shape as `cv-scorer.md` and `press-release.md` — read one for reference):
+Write `.claude/agents/<kebab-name>.md` following this template (same shape as `press-release.md` and `deck-maker.md` — read one for reference):
 
 ```markdown
 ---

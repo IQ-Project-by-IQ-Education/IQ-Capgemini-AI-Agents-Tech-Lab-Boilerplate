@@ -45,12 +45,6 @@ const STEPS = [
 
 const CARDS = [
   {
-    href: "/talent",
-    tag: "Talent",
-    title: "CV scorecard",
-    desc: "The ranked shortlist the cv-scorer agent wrote for the sales job offer — scored, justified, with vigilance points.",
-  },
-  {
     href: "/radar",
     tag: "Radar",
     title: "Press briefing & releases",
@@ -59,8 +53,8 @@ const CARDS = [
   {
     href: "/deck",
     tag: "Deck",
-    title: "Slide specs",
-    desc: "The deck specs and .pptx files your agent generated, in the Capgemini house style.",
+    title: "PowerPoint decks",
+    desc: "The executive decks your agent built and rendered, in the Capgemini house style.",
   },
 ];
 
@@ -97,11 +91,10 @@ export default function Home() {
         <span className="quickstart-tag">No idea? Perfect — start here</span>
         <h2>The zero-effort start</h2>
         <p>
-          Tell Claude Code: <strong>“quick start”</strong>. It asks you four simple questions —
-          what matters in a good hire, which competitor move to react to, which topics to watch,
-          what your deck should tell — <strong>then generates everything for you</strong>: a
-          scored CV shortlist, a press release, a news briefing and a slide deck. No technical
-          steps, ever. Watch the cards below fill up.
+          Tell Claude Code: <strong>“quick start”</strong>. It asks you three simple questions —
+          which competitor move to react to, which topics to watch, what your deck should tell —{" "}
+          <strong>then generates everything for you</strong>: a press release, a news briefing
+          and a PowerPoint deck. No technical steps, ever. Watch the cards below fill up.
         </p>
       </section>
 

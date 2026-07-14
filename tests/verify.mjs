@@ -71,7 +71,7 @@ for (const s of [
 
 // ── Agents & memory ──────────────────────────────────────────────────────────
 section("Agents (.claude/agents) & long-term memory");
-for (const a of ["cv-scorer", "press-release"]) {
+for (const a of ["press-release", "deck-maker"]) {
   need(`.claude/agents/${a}.md`, `agent: ${a}`);
 }
 need("memory/MEMORY.md", "long-term memory index");

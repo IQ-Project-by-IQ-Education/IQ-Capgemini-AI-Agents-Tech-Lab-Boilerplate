@@ -20,11 +20,10 @@ export default async function RadarPage() {
         <article className="doc">{renderMarkdown(doc.content)}</article>
       ) : (
         <div className="empty">
-          <p>No briefing yet.</p>
+          <p>Nothing here yet — and that&apos;s normal.</p>
           <p>
-            In Claude Code, run the <code>press-synthesis</code> skill on your themes and write
-            the briefing to <code>projects/2-radar-press-synthesis/output/briefing-&lt;date&gt;.md</code>.
-            Then refresh this page.
+            Tell Claude Code: <strong>“quick start”</strong>. Answer three simple questions, and
+            your press release and news briefing will appear right here. Then refresh this page.
           </p>
         </div>
       )}

@@ -26,12 +26,10 @@ export default async function DeckPage() {
 
       {!hasContent && (
         <div className="empty">
-          <p>No decks yet.</p>
+          <p>Nothing here yet — and that&apos;s normal.</p>
           <p>
-            Write a deck spec to{" "}
-            <code>projects/3-deck-pptx-creation/output/&lt;name&gt;.deck.json</code> (use the{" "}
-            <code>deck-builder</code> skill), then render it with{" "}
-            <code>npm run build:deck -- &lt;path&gt;</code>. Refresh to see it here.
+            Tell Claude Code: <strong>“quick start”</strong>. Answer three simple questions, and
+            your PowerPoint deck will appear right here. Then refresh this page.
           </p>
         </div>
       )}
@@ -46,8 +44,8 @@ export default async function DeckPage() {
             </div>
           ))}
           <p className="source" style={{ marginTop: "0.5rem" }}>
-            A <code>.pptx</code> can&apos;t render inline here — open it from{" "}
-            <code>projects/3-deck-pptx-creation/output/</code>.
+            A PowerPoint file can&apos;t be previewed inline — ask Claude Code to open it for
+            you.
           </p>
         </section>
       )}

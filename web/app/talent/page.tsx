@@ -20,13 +20,11 @@ export default async function TalentPage() {
         <article className="doc">{renderMarkdown(doc.content)}</article>
       ) : (
         <div className="empty">
-          <p>No scorecard yet.</p>
+          <p>Nothing here yet — and that&apos;s normal.</p>
           <p>
-            In Claude Code, run the <code>cv-scoring</code> skill on{" "}
-            <code>projects/1-talent-cv-scoring/data/jobs/sales-account-executive.md</code> and
-            write the result to{" "}
-            <code>projects/1-talent-cv-scoring/output/</code> as a <code>.md</code> file. Then
-            refresh this page.
+            This page fills up if you build a CV-scoring agent. Tell Claude Code:{" "}
+            <strong>“I want to build my agent”</strong> and describe a CV-screening job — a
+            sales CV bank and job offer are already included. Then refresh this page.
           </p>
         </div>
       )}

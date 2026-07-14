@@ -15,15 +15,15 @@ This repository is a **starter for a hands-on lab** (45 min theory · 2h15 build
 The conceptual spine is **"an agent is a new hire"** (instructions = rulebook, tools = accesses, memory = experience, skills = training — full mapping in `docs/good-practices.md`).
 
 1. **Theory** *(instructor)* — the new-hire metaphor; the memory × skill demo lives in `demos/`.
-2. **Design** — the participant describes the agent they want. Use the **`agent-builder`** skill: a short guided interview, one question at a time. **No idea at all?** Use the **`quick-start`** skill: four business questions, then you generate every output for them (shortlist, press release, briefing, deck) — zero technical vocabulary.
+2. **Design** — the participant describes the agent they want. Use the **`agent-builder`** skill: a short guided interview, one question at a time. **No idea at all?** Use the **`quick-start`** skill: three business questions, then you generate every output for them (press release, briefing, deck) — zero technical vocabulary.
 3. **Create** — generate the agent as a markdown file in **`.claude/agents/<name>.md`** (agent-builder does this; template inside it).
 4. **Run & iterate** — invoke the agent on real tasks. After every run: **`self-improve`** → record learnings in `memory/` → visibly apply them on the next run ("scoring CRM higher this time, as you asked").
 5. **Showcase** — use the **`showcase`** skill to turn the agent's outputs into a polished, Capgemini-branded web page (`frontend-design` + `capgemini-brand`) for the final demo.
 
 ## Pre-defined agents (`.claude/agents/`) — the fallback choice
 
-- **`cv-scorer`** — reviews applicants' CVs against a job offer. Data: `projects/1-talent-cv-scoring/data/` (116 anonymized sales CVs + the `sales-account-executive.md` offer, data-matched).
 - **`press-release`** — produces a high-quality press release from competitor information (web search / `npm run fetch:news`), following `capgemini-brand`.
+- **`deck-maker`** — builds a professional PowerPoint from notes, a topic, or another agent's output (`deck-builder` + `capgemini-brand`; rendered via `npm run build:deck`).
 
 Both read `memory/MEMORY.md` on start and end each run with 2 improvement questions. Participant agents built with `agent-builder` follow the same shape.
 
@@ -32,7 +32,7 @@ Both read `memory/MEMORY.md` on start and end each run with 2 improvement questi
 **Lab-flow skills:**
 
 - `agent-builder` — guided interview → generates the participant's agent file in `.claude/agents/`.
-- `quick-start` — for participants with no idea: 4 business questions → all outputs generated (shortlist, press release, briefing, deck), no technical vocabulary.
+- `quick-start` — for participants with no idea: 3 business questions → all outputs generated (press release, briefing, deck), no technical vocabulary.
 - `self-improve` — after every run: 2 feedback questions → learnings written to `memory/`.
 - `showcase` — end-of-lab demo frontend from the agent's outputs (**requires** `frontend-design` + `capgemini-brand`).
 - `capgemini-brand` — editorial voice + visual identity for anything client-facing (press release, deck, web).
@@ -60,9 +60,9 @@ All skills are bundled in this repo — no marketplace or plugin install needed.
 
 Project folders hold the **data and briefs** behind the pre-defined agents, plus a third use case:
 
-- **`1-talent-cv-scoring`** — CV bank (116 anonymized sales PDFs + 3 markdown smoke-test CVs `candidate-*.md`) and the sales job offer. Feeds `cv-scorer`.
-- **`2-radar-press-synthesis`** — themes + news tooling; its `output/` also hosts press releases. Feeds `press-release`.
-- **`3-deck-pptx-creation`** — deck rendering + Capgemini brand tokens (`brand/capgemini-brand.md`). Stretch: turn any output into a deck.
+- **`1-talent-cv-scoring`** — CV bank (116 anonymized sales PDFs + 3 markdown smoke-test CVs `candidate-*.md`) and the sales job offer. Data for a **custom** CV-scoring agent (via `agent-builder` + the `cv-scoring` skill) — not part of the quick-start path.
+- **`2-radar-press-synthesis`** — themes + news tooling; its `output/` hosts briefings and press releases. Feeds `press-release`.
+- **`3-deck-pptx-creation`** — deck rendering + Capgemini brand tokens (`brand/capgemini-brand.md`). Feeds `deck-maker`.
 
 ## Demos (instructor-only — `demos/`)
 

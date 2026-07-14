@@ -5,7 +5,7 @@ description: Use when checking that the lab environment works — right after cl
 
 # Test the repo
 
-Verify the whole lab with **one command** — runtime, dependencies, bundled skills, project data, PDF reading, deck rendering, and the web app build. The test script (`tests/verify.mjs`) is pure Node, offline, and cross-platform: the **same command works on macOS, Linux and Windows**.
+Verify the whole lab with **one command** — runtime, dependencies, bundled skills, agents, memory, project data, PDF reading, deck rendering, the web app build, **and an end-to-end boot of the dev server**: it starts the participants' welcome page on port 3100, checks the welcome message and the Capgemini logo are actually served, then stops it. The test script (`tests/verify.mjs`) is pure Node, offline, and cross-platform: the **same command works on macOS, Linux and Windows** (build + server checks take ~40s total).
 
 ## How to run
 

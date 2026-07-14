@@ -32,14 +32,18 @@ green ✓ / red ✗ per line:
 
 - **Runtime** — Node 20+.
 - **Dependencies** — `pdfjs-dist`, `pptxgenjs`, `tsx`, `typescript` installed.
-- **Skills** — all 8 skills present in `.claude/skills/`.
+- **Skills** — all 14 skills present in `.claude/skills/`.
+- **Agents & memory** — the two pre-defined agents (`cv-scorer`, `press-release`) and the
+  long-term memory index are in place.
 - **Projects & data** — the 3 project briefs + the CV PDFs are there.
 - **Demo** — the memory × skill (NDA) demo files are in place.
 - **References** — the vendored reading is present.
 - **Functional smoke** — actually extracts text from a sample CV (PDF pipeline) and renders
   a slide in memory (deck pipeline).
-- **Front-end** — the lab title is wired, and (if `web/` deps are installed) **the app
-  builds cleanly**.
+- **Front-end, end-to-end** — the lab title and Capgemini logo are wired, and (if `web/`
+  deps are installed) **the app builds cleanly**, then the **dev server is booted for real**
+  (on port 3100): the participants' welcome page must answer with the welcome message and
+  serve the logo before the server is stopped.
 
 It ends with a single line:
 
@@ -60,8 +64,9 @@ npm run web:dev
 ```
 
 Wait for `✓ Ready`, then open the printed link (**http://localhost:3000**). You should see
-the header **“AI Agents Tech · Lab”** and the heading **“Your agents’ work, on screen”**.
-Seeing the title means the boilerplate front-end builds and serves correctly. Press
+the Capgemini logo, the header **“AI Agents Tech · Lab”** and the welcome heading
+**“Welcome — this morning, you build your own AI agent”** with the 4 lab steps. Step 1
+already verified this page serves end-to-end; this step is the human eyeball on it. Press
 `Ctrl-C` to stop the server.
 
 ---

@@ -7,7 +7,7 @@
 // Pure Node, no dependencies, no network. Safe to run on a locked-down machine.
 
 import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { execFileSync } from "node:child_process";
+import { execFileSync, execSync, spawn } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -148,12 +148,12 @@ try {
 if (existsSync(rel("web/node_modules"))) {
   process.stdout.write("  … building the web app (~20s) … ");
   try {
-    // shell:true so a shell resolves `npm` → `npm.cmd` (via PATHEXT) on Windows. Modern Node
-    // (CVE-2024-27980 mitigation) refuses to execFile a .cmd/.bat without it and throws EINVAL.
-    execFileSync("npm", ["run", "build"], {
+    // execSync runs through a shell, which resolves `npm` → `npm.cmd` (via PATHEXT) on
+    // Windows. Modern Node (CVE-2024-27980 mitigation) refuses to execFile a .cmd/.bat
+    // directly and throws EINVAL.
+    execSync("npm run build", {
       cwd: rel("web"),
       stdio: ["ignore", "pipe", "pipe"],
-      shell: true,
     });
     console.log("\r  \x1b[32m✓\x1b[0m web app builds cleanly            ");
   } catch (e) {
@@ -162,6 +162,56 @@ if (existsSync(rel("web/node_modules"))) {
     const detail = out || String(e.message ?? e);
     console.log("    " + detail.split("\n").slice(-6).join("\n    "));
     failures++;
+  }
+
+  // End-to-end: boot the dev server and check the participants' welcome page — the exact
+  // flow a participant runs on lab day (`npm run web:dev` → http://localhost:3000).
+  process.stdout.write("  … booting the dev server — welcome page check (~15s) … ");
+  const PORT = 3100; // dedicated port, so a dev server already running on 3000 doesn't interfere
+  // Single command string + shell:true — resolves npm→npm.cmd on Windows without tripping
+  // DEP0190. detached on POSIX makes the server its own process group so we can kill
+  // npm AND next; taskkill /T does that job on Windows.
+  const server = spawn(`npm run dev -- --port ${PORT}`, {
+    cwd: rel("web"),
+    stdio: "ignore",
+    shell: true,
+    detached: process.platform !== "win32",
+  });
+  const stopServer = () => {
+    try {
+      if (process.platform === "win32") {
+        execFileSync("taskkill", ["/pid", String(server.pid), "/T", "/F"], { stdio: "ignore" });
+      } else {
+        process.kill(-server.pid, "SIGTERM");
+      }
+    } catch {}
+  };
+  try {
+    let html = "";
+    const deadline = Date.now() + 90_000;
+    for (;;) {
+      try {
+        const res = await fetch(`http://localhost:${PORT}/`);
+        if (res.ok) {
+          html = await res.text();
+          break;
+        }
+      } catch {}
+      if (Date.now() > deadline) throw new Error(`dev server did not answer on port ${PORT} within 90s`);
+      await new Promise((r) => setTimeout(r, 1000));
+    }
+    console.log(`\r  \x1b[32m✓\x1b[0m dev server boots and serves the home page (port ${PORT})   `);
+    if (html.includes("you build your own AI agent")) ok("participants' welcome message is on the page");
+    else fail("welcome message not found on the home page — check web/app/page.tsx");
+    const logo = await fetch(`http://localhost:${PORT}/capgemini-logo.webp`);
+    if (logo.ok) ok("Capgemini logo is served");
+    else fail(`Capgemini logo not served (HTTP ${logo.status}) — check web/public/capgemini-logo.webp`);
+  } catch (e) {
+    console.log("\r  \x1b[31m✗\x1b[0m dev server / welcome page check failed              ");
+    console.log("    " + String(e.message ?? e).split("\n")[0]);
+    failures++;
+  } finally {
+    stopServer();
   }
 } else {
   warn("web deps not installed — run `npm --prefix web install` (IT pre-installs this)");

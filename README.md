@@ -76,9 +76,11 @@ through the same steps on screen.
 
 ## Check it works
 
-Before the lab, confirm the repo runs on your machine: `npm test` (a Node self-test, exits 0
-when everything's in place) then `npm run web:dev` (boot the app, see the lab title). Full
-2-step protocol — runnable from the Claude app too — in [`TESTING.md`](TESTING.md).
+Before the lab, confirm the repo runs on your machine: `npm test` — a Node self-test that
+checks everything **including booting the dev server and verifying the participants' welcome
+page end-to-end**, and exits 0 when the machine is ready. Then `npm run web:dev` for the
+human eyeball on the page. Full protocol — runnable from the Claude app too — in
+[`TESTING.md`](TESTING.md).
 
 ## Skills (bundled — no download)
 

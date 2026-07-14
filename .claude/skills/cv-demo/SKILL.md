@@ -28,6 +28,8 @@ Distill the feedback into **one memory line** (e.g. *"Prefer hands-on sales expe
 
 ## Staging notes
 
+- **Optional but strong opener**: before beat 01, write the five-beat flow to `agent-flow.mmd` (repo root, Mermaid, shape in `agent-flow.example.mmd`) and put **http://localhost:3000/flow** on the projector, the audience sees the plan before you run it.
+
 - Timebox: ~10 minutes. Beat 1 is the slowest — announce it ("20 CVs, one pass, give me a minute") and let the table land all at once.
 - Fallback if PDFs misbehave: the 3 markdown CVs (`candidate-*.md`) keep the flow alive.
 - Log the run (`npm run log:run -- 1-talent-cv-scoring …`) so "Recent runs" has a first entry.

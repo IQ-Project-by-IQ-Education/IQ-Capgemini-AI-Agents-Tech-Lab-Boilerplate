@@ -27,6 +27,9 @@ projects/*/output/*
 # Per-participant run-log (created on first `npm run log:run`; the *.example.json shows the shape)
 projects/*/runs.json
 
+# Live agent-flow diagram (rewritten during the design interview; agent-flow.example.mmd shows the shape)
+/agent-flow.mmd
+
 # OS / editor
 .DS_Store
 Thumbs.db

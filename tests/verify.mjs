@@ -213,6 +213,9 @@ if (existsSync(rel("web/node_modules"))) {
     const logo = await fetch(`http://localhost:${PORT}/capgemini-logo.webp`);
     if (logo.ok) ok("Capgemini logo is served");
     else fail(`Capgemini logo not served (HTTP ${logo.status}) — check web/public/capgemini-logo.webp`);
+    const flow = await fetch(`http://localhost:${PORT}/flow`);
+    if (flow.ok) ok("live Agent Flow page responds");
+    else fail(`Agent Flow page failed (HTTP ${flow.status}) — check web/app/flow`);
   } catch (e) {
     console.log("\r  \x1b[31m✗\x1b[0m dev server / welcome page check failed              ");
     console.log("    " + String(e.message ?? e).split("\n")[0]);

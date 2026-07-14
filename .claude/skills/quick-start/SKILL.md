@@ -7,6 +7,10 @@ description: Use when the participant has no idea what to build, doesn't know wh
 
 For participants with **no use case in mind**. You ask three business questions, then you do all the work: run the agents and skills, produce every output, and show them on screen. **Zero technical vocabulary with the participant** — no file paths, no commands, no skill names, no JSON. You translate everything into plain language.
 
+## Step 0 — Put the live Agent Flow on screen
+
+Make sure the web app is running (`kick-off` skill) and tell the participant to open **http://localhost:3000/flow** next to their terminal. Write a first `agent-flow.mmd` at the repo root (Mermaid `flowchart TD`, shape in `agent-flow.example.mmd`) showing the three-output pipeline with dashed `?` nodes for the unanswered questions, then **rewrite it after each answer** so the plan draws itself live. Plain-language labels, no commas inside `[...]` node labels (they break Mermaid), max ~10 nodes.
+
 ## Step 1 — Three questions (one at a time, plain language)
 
 Ask them conversationally, one per message. If the participant hesitates on any of them, propose the default and move on — this must feel effortless.

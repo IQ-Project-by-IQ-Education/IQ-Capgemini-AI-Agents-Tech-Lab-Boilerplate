@@ -15,7 +15,7 @@ You will leave this lab with **your own working agent**, not a slide deck. You'l
 | Step | What happens | What powers it |
 | --- | --- | --- |
 | 1. **Theory** | What an agent *is* — the "new hire" metaphor (instructions = rulebook, tools = accesses, memory = experience, skills = training) | [`docs/good-practices.md`](docs/good-practices.md) · instructor demo in `demos/` |
-| 2. **Design** | A guided chat interviews you about the agent you want — you answer business questions, Claude handles the tooling | `agent-builder` skill |
+| 2. **Design** | A guided chat interviews you about the agent you want — you answer business questions, Claude handles the tooling. Your agent's flow **draws itself live** at [localhost:3000/flow](http://localhost:3000/flow) while you answer | `agent-builder` skill · Mermaid |
 | 3. **Create** | Your agent is generated as a markdown file in your local repo | `.claude/agents/<your-agent>.md` |
 | 4. **Run & iterate** | Run it on real tasks; after each run it asks 2 questions and **records what it learns** | `self-improve` skill · `memory/` |
 | 5. **Showcase** | Turn its outputs into a polished, Capgemini-branded page for the demo | `showcase` + `frontend-design` + `capgemini-brand` skills |
@@ -123,7 +123,7 @@ What this repo needs to reach the network, and what stays local:
 | Capability | Network needed? | Notes |
 | --- | --- | --- |
 | `npm install` (root) | Yes, once | npm registry. Pinned via `package-lock.json`. Deps: `pptxgenjs`, `pdfjs-dist`, `tsx`, `typescript`, `@types/node` (0 known vulnerabilities). |
-| `npm --prefix web install` (front-end) | Yes, once | npm registry. ~28 packages (`next`, `react`, `react-dom`), pinned via `web/package-lock.json`. **Pre-install on participant machines** alongside the CV data. 2 moderate transitive advisories, acceptable for a local lab. |
+| `npm --prefix web install` (front-end) | Yes, once | npm registry. `next`, `react`, `react-dom` + `mermaid` (renders the live Agent Flow page locally), pinned via `web/package-lock.json`. **Pre-install on participant machines** alongside the CV data. 2 moderate transitive advisories, acceptable for a local lab. |
 | Claude Code itself | Yes | `api.anthropic.com` — the agent engine. |
 | **Deck** project | **No** (offline) | Renders `.pptx` fully locally via `pptxgenjs`. |
 | **Talent** project | **No** for data | CVs are local PDFs read on-device. Scoring is done by Claude. |

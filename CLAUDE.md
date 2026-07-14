@@ -72,7 +72,7 @@ Project folders hold the **data and briefs** behind the pre-defined agents, plus
 
 ## Front-end (`web/`)
 
-A minimal Next.js app renders each project's `output/`. Run `npm run web:dev` → http://localhost:3000. It's deliberately plain — upgrading it with `showcase` at the end of the lab is a demo moment, not a gap.
+A Next.js app renders each project's `output/`. Run `npm run web:dev` → http://localhost:3000. The **/flow** page renders `agent-flow.mmd` (repo root, Mermaid) live, polling every 2s — the design skills rewrite that file after each interview answer so the participant watches their agent's flow draw itself next to the terminal. Upgrading the app with `showcase` at the end of the lab is a demo moment.
 
 ## Tooling
 

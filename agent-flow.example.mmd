@@ -1,0 +1,15 @@
+%% Live "Agent Flow" panel, rendered at http://localhost:3000/flow
+%% The agent-builder and quick-start skills rewrite agent-flow.mmd (same folder,
+%% gitignored) after each participant answer; the page redraws it every 2 seconds.
+%% This example shows the target shape: inputs, key actions, output, memory loop.
+%% Keep node labels simple: no commas or parentheses inside the brackets.
+flowchart TD
+  A[/Competitor news from the web/] --> B
+  subgraph agent [Press Release agent]
+    B[Gather and source the facts] --> C[Write the release in brand voice]
+    C --> D[Add quote and boilerplate]
+  end
+  D --> E([Press release on the Radar page])
+  E --> F{{Your feedback in 2 questions}}
+  F -. writes a learning .-> M[(Long-term memory)]
+  M -. read at onboarding .-> B

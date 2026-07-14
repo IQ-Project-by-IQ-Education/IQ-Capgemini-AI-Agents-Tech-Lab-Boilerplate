@@ -603,6 +603,26 @@ body > * {
   font-size: 0.85rem;
 }
 
+/* ── Live agent-flow canvas ─────────────────────────────────────────────── */
+.flow-canvas {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--glass);
+  padding: 1.6rem;
+  overflow-x: auto;
+}
+.flow-canvas svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+.flow-hint {
+  margin-top: 0.7rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
 /* ── Recent runs panel ──────────────────────────────────────────────────── */
 .runs {
   margin-top: 2.6rem;

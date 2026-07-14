@@ -7,6 +7,12 @@ description: Use when the participant wants to create their own agent, design a 
 
 Turn a participant's idea into a **working agent file** in `.claude/agents/`, through a short guided interview. The participant is possibly non-technical: you carry all the tooling decisions; they only answer business questions.
 
+## Step 0 — Put the live Agent Flow on screen
+
+Before the first question, make sure the web app is running (`kick-off` skill) and tell the participant to open **http://localhost:3000/flow** next to their terminal. Then, **after every answer**, rewrite `agent-flow.mmd` at the repo root (Mermaid `flowchart TD`, shape in `agent-flow.example.mmd`): the page redraws it within 2 seconds, so they watch their agent take shape as they speak.
+
+Flow rules: map the **key actions** (inputs → agent steps in a subgraph → deliverable → feedback → memory loop back to onboarding), max ~10 nodes, plain-language labels (no commas inside `[...]` node labels, they break Mermaid — split into two nodes or rephrase). Represent still-unanswered parts as dashed nodes labeled `?`, and replace them as answers land. Write the file silently, no need to narrate each update.
+
 ## Step 1 — Interview (one question at a time, max 5)
 
 Ask **one question per message**, in plain language, no jargon. Cover:

@@ -61,6 +61,7 @@ for (const s of [
   "test-repo",
   "kick-off",
   "agent-builder",
+  "quick-start",
   "self-improve",
   "capgemini-brand",
   "showcase",

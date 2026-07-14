@@ -32,7 +32,7 @@ green ✓ / red ✗ per line:
 
 - **Runtime** — Node 20+.
 - **Dependencies** — `pdfjs-dist`, `pptxgenjs`, `tsx`, `typescript` installed.
-- **Skills** — all 14 skills present in `.claude/skills/`.
+- **Skills** — all 15 skills present in `.claude/skills/`.
 - **Agents & memory** — the two pre-defined agents (`cv-scorer`, `press-release`) and the
   long-term memory index are in place.
 - **Projects & data** — the 3 project briefs + the CV PDFs are there.

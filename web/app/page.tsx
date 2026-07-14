@@ -91,10 +91,17 @@ export default function Home() {
             </li>
           ))}
         </ol>
-        <p className="steps-note">
-          No idea, or stuck? Two agents are ready to adopt: <strong>cv-scorer</strong> (reviews
-          CVs against a job offer) and <strong>press-release</strong> (writes a press release
-          from competitor news). Just ask Claude Code for one of them.
+      </section>
+
+      <section className="quickstart">
+        <span className="quickstart-tag">No idea? Perfect — start here</span>
+        <h2>The zero-effort start</h2>
+        <p>
+          Tell Claude Code: <strong>“quick start”</strong>. It asks you four simple questions —
+          what matters in a good hire, which competitor move to react to, which topics to watch,
+          what your deck should tell — <strong>then generates everything for you</strong>: a
+          scored CV shortlist, a press release, a news briefing and a slide deck. No technical
+          steps, ever. Watch the cards below fill up.
         </p>
       </section>
 

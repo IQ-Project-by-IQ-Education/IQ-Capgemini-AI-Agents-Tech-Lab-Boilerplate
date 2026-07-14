@@ -11,7 +11,7 @@ Turn a participant's idea into a **working agent file** in `.claude/agents/`, th
 
 Ask **one question per message**, in plain language, no jargon. Cover:
 
-1. **The job**: "If this agent were a new hire, what's their job title and their one deliverable?" — if they have no idea or stall, offer the two pre-defined agents: **cv-scorer** (review CVs against a job offer) or **press-release** (press release from competitor info), and stop here.
+1. **The job**: "If this agent were a new hire, what's their job title and their one deliverable?" — if they have no idea or stall, switch to the **`quick-start`** skill (four simple questions, everything generated for them) and stop here; participants with a vague idea can also adopt a pre-defined agent (**cv-scorer** or **press-release**) as a base.
 2. **The inputs**: what does it read? (files they'll drop in the repo, public web info, the provided datasets…)
 3. **The output**: what does the deliverable look like, and who is it for? (a Markdown report, a shortlist, a briefing…)
 4. **The quality bar**: what makes a run *good*? What must it never do?

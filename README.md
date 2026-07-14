@@ -20,7 +20,12 @@ You will leave this lab with **your own working agent**, not a slide deck. You'l
 | 4. **Run & iterate** | Run it on real tasks; after each run it asks 2 questions and **records what it learns** | `self-improve` skill · `memory/` |
 | 5. **Showcase** | Turn its outputs into a polished, Capgemini-branded page for the demo | `showcase` + `frontend-design` + `capgemini-brand` skills |
 
-**No idea, or stuck?** Two pre-defined agents are ready in `.claude/agents/`:
+**No idea at all? Say “quick start”.** The `quick-start` skill asks four simple business
+questions (what matters in a good hire · which competitor move to react to · which topics to
+watch · what the deck should tell) and then **generates every output for you** — CV shortlist,
+press release, news briefing and deck — with zero technical steps.
+
+Prefer a base to adapt? Two pre-defined agents are ready in `.claude/agents/`:
 
 - **`cv-scorer`** — automatically reviews applicants' CVs against a given job offer (data included).
 - **`press-release`** — produces a high-quality press release based on competitor information.
@@ -89,6 +94,7 @@ All skills live **inside this repo** under `.claude/skills/` and are loaded auto
 | Skill | What it's for |
 | --- | --- |
 | **agent-builder** | Guided interview → generates *your* agent as a file in `.claude/agents/`. |
+| **quick-start** | No idea? 4 business questions → every output generated for you, zero technical steps. |
 | **self-improve** | After every run: 2 feedback questions → learnings saved to `memory/` (long-term memory). |
 | **showcase** | End-of-lab demo frontend built from your agent's outputs (uses frontend-design + capgemini-brand). |
 | **capgemini-brand** | Capgemini editorial voice + visual identity for anything client-facing. |
@@ -142,6 +148,7 @@ What this repo needs to reach the network, and what stays local:
 │   │   └── press-release.md   # pre-defined: PR from competitor info
 │   └── skills/                # Bundled skills — no download needed
 │       ├── agent-builder/     # interview → your agent file
+│       ├── quick-start/       # no idea? 4 questions → all outputs
 │       ├── self-improve/      # feedback → long-term memory
 │       ├── showcase/          # end-of-lab demo frontend
 │       ├── capgemini-brand/   # editorial voice + visual identity

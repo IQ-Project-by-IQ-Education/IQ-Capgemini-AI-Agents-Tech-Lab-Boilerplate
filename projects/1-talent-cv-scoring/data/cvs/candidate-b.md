@@ -1,17 +1,17 @@
 # Candidate B (anonymized proxy)
 
-**Target role:** GenAI Consultant
+**Target role:** Sales Account Executive
 **Languages:** English (fluent), German (fluent)
 
 ## Summary
-Software engineer with deep LLM tooling experience, less consulting exposure. Strong builder, lighter on client-facing delivery.
+High-energy prospector, 2.5 years in inside sales. Excellent at opening doors and qualifying; has not yet owned a full sales cycle or carried a closing quota.
 
 ## Experience
-- **ML Engineer, AI startup (3 yrs)** — shipped agent-based products; owned prompting, fine-tuning, and production deployment; on-call for reliability.
-- **Backend Engineer (2 yrs)** — distributed systems, TypeScript/Python.
+- **Senior SDR, software scale-up (1.5 yrs)** — outbound prospecting into manufacturing accounts; 130% of meetings target; built sequenced campaigns in HubSpot.
+- **Inside Sales Rep (1 yr)** — inbound qualification and renewals support for the DACH region.
 
 ## Skills
-Agents, fine-tuning, RAG, MLOps, evaluation. Python (expert), TypeScript (expert). Limited direct client work.
+Prospecting, cold outreach, qualification (BANT), HubSpot CRM. No negotiation/closing ownership yet.
 
 ## Education
-BSc Computer Science.
+BSc Business Administration.

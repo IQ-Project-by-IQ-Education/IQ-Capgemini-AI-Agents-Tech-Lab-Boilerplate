@@ -67,3 +67,7 @@ provides the PDF, read it with `npm run read:pdf` for logo rules, shapes, or det
 - Great design can't save a weak story — get the narrative right first.
 - The renderer supports the slide types above; if you need charts/images, say so and adapt rather than hand-editing the .pptx.
 - The .pptx is generated output — edit the JSON spec and re-render, don't hand-patch the file.
+
+## After every run
+
+Apply the `self-improve` skill: ask the participant 2 short questions about this run and save the learnings to `memory/` — the next run must start smarter.

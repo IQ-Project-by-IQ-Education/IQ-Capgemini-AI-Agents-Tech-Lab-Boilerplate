@@ -41,3 +41,7 @@ Score candidates against a job description **transparently** — every score is 
 - This is **decision support, not a hiring decision.** A human owns the call.
 - Models can absorb bias from the CV text — flag it, don't hide it.
 - Scores are only as good as the grid; make the grid explicit.
+
+## After every run
+
+Apply the `self-improve` skill: ask the participant 2 short questions about this run and save the learnings to `memory/` — the next run must start smarter.

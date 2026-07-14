@@ -48,12 +48,10 @@ body {
   text-decoration: none;
   color: var(--cap-purple);
 }
-.brand-mark {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  background: linear-gradient(135deg, var(--cap-blue), var(--cap-vibrant));
-  display: inline-block;
+.brand-logo {
+  height: 26px;
+  width: auto;
+  display: block;
 }
 .brand-text {
   font-weight: 700;
@@ -101,6 +99,12 @@ body {
 }
 
 /* Landing hero + cards */
+.hero-logo {
+  height: 44px;
+  width: auto;
+  display: block;
+  margin: 0 0 1.2rem;
+}
 .hero h1 {
   font-size: 2rem;
   letter-spacing: -0.02em;
@@ -110,7 +114,75 @@ body {
 .hero p {
   color: var(--muted);
   margin: 0 0 2rem;
-  max-width: 40rem;
+  max-width: 42rem;
+}
+
+/* Onboarding steps */
+.steps {
+  margin: 0 0 2.5rem;
+}
+.steps h2,
+.card-grid-wrap h2 {
+  color: var(--cap-purple);
+  font-size: 1.15rem;
+  border-bottom: 1px solid var(--cap-gray);
+  padding-bottom: 0.3rem;
+  margin: 0 0 1.1rem;
+}
+.step-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+.step {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  border: 1px solid var(--cap-gray);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+}
+.step-n {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cap-blue);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.15rem;
+}
+.step h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+  color: var(--cap-blue);
+}
+.step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.step code {
+  background: var(--cap-gray);
+  padding: 0.05rem 0.3rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: var(--ink);
+}
+.steps-note {
+  margin: 1rem 0 0;
+  padding: 0.8rem 1.1rem;
+  border-left: 3px solid var(--cap-vibrant);
+  background: #f7fbfd;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--muted);
+  font-size: 0.92rem;
 }
 .card-grid {
   display: grid;

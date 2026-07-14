@@ -1,8 +1,29 @@
+<p align="center">
+  <img src="web/public/capgemini-logo.webp" alt="Capgemini" width="280" />
+</p>
+
 # Lab 3 — AI Agents Tech · Capgemini COMEX
 
-> **Build a working AI agent in one morning.** Starter repository for the *AI Agents Tech* lab — Capgemini COMEX, June 18th 2026.
+> **Build your own working AI agent in one morning.** Starter repository for the *AI Agents Tech* lab — Capgemini COMEX.
 
-You will leave this lab with **a functional agent project**, not a slide deck. Pick one of the three use cases below, follow the 80/20 method, and ship something that actually runs.
+You will leave this lab with **your own working agent**, not a slide deck. You'll design it through a guided conversation, create it as a file in this repo, run it on real tasks, watch it learn from your feedback — and showcase its output in a branded frontend at the final demo.
+
+---
+
+## The lab flow
+
+| Step | What happens | What powers it |
+| --- | --- | --- |
+| 1. **Theory** | What an agent *is* — the "new hire" metaphor (instructions = rulebook, tools = accesses, memory = experience, skills = training) | [`docs/good-practices.md`](docs/good-practices.md) · instructor demo in `demos/` |
+| 2. **Design** | A guided chat interviews you about the agent you want — you answer business questions, Claude handles the tooling | `agent-builder` skill |
+| 3. **Create** | Your agent is generated as a markdown file in your local repo | `.claude/agents/<your-agent>.md` |
+| 4. **Run & iterate** | Run it on real tasks; after each run it asks 2 questions and **records what it learns** | `self-improve` skill · `memory/` |
+| 5. **Showcase** | Turn its outputs into a polished, Capgemini-branded page for the demo | `showcase` + `frontend-design` + `capgemini-brand` skills |
+
+**No idea, or stuck?** Two pre-defined agents are ready in `.claude/agents/`:
+
+- **`cv-scorer`** — automatically reviews applicants' CVs against a given job offer (data included).
+- **`press-release`** — produces a high-quality press release based on competitor information.
 
 ---
 
@@ -15,25 +36,26 @@ You will leave this lab with **a functional agent project**, not a slide deck. P
 
 ---
 
-## Pick your project
+## Data & briefs (`projects/`)
 
-Each project is self-contained under `projects/`. Start by reading its `README.md`.
+The project folders hold the **data and briefs** behind the pre-defined agents, plus a stretch use case. Each has its own `README.md`.
 
-| Project | Folder | What you build | Data |
+| Project | Folder | What it feeds | Data |
 | --- | --- | --- | --- |
-| **Talent** — CV scoring | [`projects/1-talent-cv-scoring`](projects/1-talent-cv-scoring) | Score & rank CVs against a job description, with motivated criteria | Anonymized proxy CVs (provided) |
-| **Radar** — Press synthesis ⭐ | [`projects/2-radar-press-synthesis`](projects/2-radar-press-synthesis) | Daily executive briefing of business & tech news, filtered on themes | Public news (Tavily / RSS) |
-| **Deck** — Professional PPTX | [`projects/3-deck-pptx-creation`](projects/3-deck-pptx-creation) | Turn content into a clean, executive-ready PowerPoint deck | Your notes / another agent's output |
+| **Talent** — CV scoring | [`projects/1-talent-cv-scoring`](projects/1-talent-cv-scoring) | The `cv-scorer` agent: score & rank CVs against the sales job offer | 116 anonymized sales CVs + matched job offer (provided) |
+| **Radar** — Press ⭐ | [`projects/2-radar-press-synthesis`](projects/2-radar-press-synthesis) | The `press-release` agent & press briefings | Public news (Tavily / web search) |
+| **Deck** — Professional PPTX | [`projects/3-deck-pptx-creation`](projects/3-deck-pptx-creation) | Stretch: turn any agent output into an executive deck | Another agent's output + brand tokens |
 
-⭐ = **safety-net project**: demonstrable end-to-end with public data, no internal Capgemini data required.
+⭐ = demonstrable end-to-end with public data, no internal Capgemini data required.
 
 ---
 
 ## Quick start
 
 ```bash
-# 1. Install tooling (Node 20+)
+# 1. Install tooling (Node 20+) — or just ask Claude Code to "kick off the lab"
 npm install
+npm --prefix web install
 
 # 2. Configure API keys (optional — only for the news/web fetch scripts)
 cp .env.example .env
@@ -42,9 +64,15 @@ cp .env.example .env
 # 3. Open the repo with Claude Code
 claude
 
-# 4. Inside Claude Code, tell it which project you picked, e.g.:
-#    "Let's build the Radar press-synthesis project. Read its README and the skill, then start."
+# 4. Inside Claude Code, start designing your agent:
+#    "I want to build my agent."           → guided interview (agent-builder skill)
+#    …or adopt a pre-defined one:
+#    "Run the cv-scorer agent on the sales job offer."
+#    "Use the press-release agent: react to <competitor>'s latest announcement."
 ```
+
+The welcome page at `http://localhost:3000` (after `npm run web:dev`) walks participants
+through the same steps on screen.
 
 ## Check it works
 
@@ -58,6 +86,12 @@ All skills live **inside this repo** under `.claude/skills/` and are loaded auto
 
 | Skill | What it's for |
 | --- | --- |
+| **agent-builder** | Guided interview → generates *your* agent as a file in `.claude/agents/`. |
+| **self-improve** | After every run: 2 feedback questions → learnings saved to `memory/` (long-term memory). |
+| **showcase** | End-of-lab demo frontend built from your agent's outputs (uses frontend-design + capgemini-brand). |
+| **capgemini-brand** | Capgemini editorial voice + visual identity for anything client-facing. |
+| **test-repo** | One-command environment check (`npm test`), cross-platform macOS/Windows with per-OS fixes. |
+| **kick-off** | Install all dependencies and launch the local web app. |
 | **cv-scoring** | House-style scoring grid + ranking output (Talent). |
 | **press-synthesis** | Raw news → executive briefing (Radar). |
 | **deck-builder** | JSON deck spec → themed `.pptx` (Deck). |
@@ -101,7 +135,16 @@ What this repo needs to reach the network, and what stays local:
 ├── CLAUDE.md                  # Project context Claude Code reads on every session
 ├── .claude/
 │   ├── settings.json          # Permissions for the lab
+│   ├── agents/                # Agents live HERE — yours will too
+│   │   ├── cv-scorer.md       # pre-defined: CVs vs job offer
+│   │   └── press-release.md   # pre-defined: PR from competitor info
 │   └── skills/                # Bundled skills — no download needed
+│       ├── agent-builder/     # interview → your agent file
+│       ├── self-improve/      # feedback → long-term memory
+│       ├── showcase/          # end-of-lab demo frontend
+│       ├── capgemini-brand/   # editorial voice + visual identity
+│       ├── test-repo/         # env check (npm test), Mac/Windows
+│       ├── kick-off/          # install deps + dev server
 │       ├── cv-scoring/
 │       ├── press-synthesis/
 │       ├── deck-builder/
@@ -110,7 +153,8 @@ What this repo needs to reach the network, and what stays local:
 │       ├── nda-analysis/      # review an NDA + cross-check memory
 │       ├── brainstorming/     # vendored & trimmed (superpowers)
 │       └── teach/             # vendored (Matt Pocock) — invoke by name
-├── projects/                  # Pick ONE — each is a self-contained brief
+├── memory/                    # Long-term memory — grows as your agent learns
+├── projects/                  # Data & briefs behind the agents
 │   ├── 1-talent-cv-scoring/   # data/cvs/ = 116 anonymized PDF CVs
 │   ├── 2-radar-press-synthesis/
 │   └── 3-deck-pptx-creation/  # incl. Capgemini brand tokens (brand/)

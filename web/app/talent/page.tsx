@@ -22,8 +22,9 @@ export default async function TalentPage() {
         <div className="empty">
           <p>No scorecard yet.</p>
           <p>
-            In Claude Code, run the <code>cv-scoring</code> skill on a job in{" "}
-            <code>projects/1-talent-cv-scoring/data/jobs/</code> and write the result to{" "}
+            In Claude Code, run the <code>cv-scoring</code> skill on{" "}
+            <code>projects/1-talent-cv-scoring/data/jobs/sales-account-executive.md</code> and
+            write the result to{" "}
             <code>projects/1-talent-cv-scoring/output/</code> as a <code>.md</code> file. Then
             refresh this page.
           </p>

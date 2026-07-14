@@ -7,14 +7,14 @@
 ## What's provided
 
 - **`data/cvs/`** — a database of **116 public, anonymized CVs in PDF** (the main data source), plus 3 tiny markdown CVs (`candidate-*.md`) for a quick smoke test. Provenance: `data/cvs/README.md`.
-- `data/jobs/` — sample job descriptions to score against. **Data-matched default:** the CV bank is all sales résumés, so use `data/jobs/sales-account-executive.md` for the cleanest demo (the other JDs will score sales CVs against off-role criteria).
+- `data/jobs/` — the job description to score against: `sales-account-executive.md`. It is **data-matched** to the CV bank (all sales résumés), so scoring stays on-role.
 - Skill: [`cv-scoring`](../../.claude/skills/cv-scoring/SKILL.md) — Claude Code uses it automatically.
 - Skill: [`pdf-reading`](../../.claude/skills/pdf-reading/SKILL.md) + `npm run read:pdf -- <file>` — reads the CV PDFs on-device, **standalone** (no network, no Python).
 
 ## 80/20 path
 
 1. Open Claude Code in this repo. Tell it: *"Build the Talent CV-scoring project. Read the project README and use the cv-scoring skill."*
-2. Pick one job description from `data/jobs/`.
+2. Open the job description in `data/jobs/sales-account-executive.md`.
 3. Ask Claude to **extract the scoring grid** from that job description and confirm the criteria/weights with you (this is the 80/20 lever — get the grid right).
 4. **Start with a sample** of the bank — score ~8–10 CVs from `data/cvs/` (don't try all 116 live), writing the scorecard to `output/`. Scale up once the grid is solid.
 5. Review the **vigilance & fairness** section together — this is the part you demo.

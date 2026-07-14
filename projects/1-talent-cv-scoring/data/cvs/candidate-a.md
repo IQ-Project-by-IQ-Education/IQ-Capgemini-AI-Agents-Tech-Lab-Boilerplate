@@ -1,17 +1,17 @@
 # Candidate A (anonymized proxy)
 
-**Target role:** GenAI Consultant
+**Target role:** Sales Account Executive
 **Languages:** English (fluent), French (native), Spanish (basic)
 
 ## Summary
-Management consultant turned applied-AI practitioner. 4 years at a strategy boutique, then 2 years delivering data/AI projects for financial-services clients.
+Full-cycle enterprise seller. 6 years of quota-carrying B2B sales with consistent target attainment and strong CRM and forecasting discipline.
 
 ## Experience
-- **Applied AI Lead, FinServ client (2 yrs)** — built a RAG assistant over internal policy docs; ran the evaluation framework; coordinated a 5-person delivery team.
-- **Consultant, strategy boutique (4 yrs)** — market-entry and operating-model studies; heavy client-facing work in English.
+- **Account Executive, SaaS vendor (4 yrs)** — owned a portfolio of enterprise accounts end to end: prospecting, discovery, negotiation, closing. 110–125% of quota three years running; ran a MEDDIC-qualified pipeline in Salesforce.
+- **Sales Development Rep (2 yrs)** — outbound prospecting into financial services; top of team on qualified meetings booked.
 
 ## Skills
-Prompt engineering, RAG, evaluation, stakeholder management. Python (intermediate). Some exposure to MLOps.
+Full-cycle selling, negotiation, Salesforce, forecasting, MEDDIC. Comfortable presenting to C-level.
 
 ## Education
 MSc Management, top-tier business school.

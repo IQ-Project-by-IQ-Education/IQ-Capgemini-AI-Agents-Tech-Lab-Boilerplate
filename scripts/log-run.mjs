@@ -5,7 +5,7 @@
 //
 // Example:
 //   npm run log:run -- 1-talent-cv-scoring "10 CVs scored; top: Candidate A (4.4/5)" \
-//     --input "GenAI Consultant JD" --output "output/shortlist-genai.md"
+//     --input "Sales Account Executive JD" --output "output/shortlist-sales-account-executive.md"
 //
 // Pure Node, no dependencies. Creates projects/<project>/runs.json if it doesn't exist.
 // This is the deliberately-simple "start with a file" version of memory — when a flat JSON

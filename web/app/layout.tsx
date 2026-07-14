@@ -21,7 +21,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <header className="site-header">
           <Link href="/" className="brand">
-            <span className="brand-mark" aria-hidden />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/capgemini-logo.webp" alt="Capgemini" className="brand-logo" />
             <span className="brand-text">
               AI Agents Tech <span className="brand-sub">· Lab</span>
             </span>
@@ -36,7 +37,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </header>
         <main className="site-main">{children}</main>
         <footer className="site-footer">
-          Built in Claude Code · upgrade this UI live with the <code>frontend-design</code> skill
+          Built in Claude Code · upgrade this UI live with the <code>showcase</code> skill
         </footer>
       </body>
     </html>

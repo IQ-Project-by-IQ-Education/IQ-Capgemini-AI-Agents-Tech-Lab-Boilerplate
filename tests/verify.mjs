@@ -58,9 +58,22 @@ for (const s of [
   "nda-analysis",
   "brainstorming",
   "teach",
+  "test-repo",
+  "kick-off",
+  "agent-builder",
+  "self-improve",
+  "capgemini-brand",
+  "showcase",
 ]) {
   need(`.claude/skills/${s}/SKILL.md`, `${s}`);
 }
+
+// ── Agents & memory ──────────────────────────────────────────────────────────
+section("Agents (.claude/agents) & long-term memory");
+for (const a of ["cv-scorer", "press-release"]) {
+  need(`.claude/agents/${a}.md`, `agent: ${a}`);
+}
+need("memory/MEMORY.md", "long-term memory index");
 
 // ── Projects & data ──────────────────────────────────────────────────────────
 section("Projects & data");
@@ -124,6 +137,7 @@ try {
 // ── Front-end (web/) ────────────────────────────────────────────────────────────
 section("Front-end (web/)");
 need("web/package.json", "web app present");
+need("web/public/capgemini-logo.webp", "Capgemini logo");
 try {
   const layout = readFileSync(rel("web/app/layout.tsx"), "utf8");
   if (layout.includes("AI Agents Tech")) ok('lab title wired ("AI Agents Tech — Lab")');

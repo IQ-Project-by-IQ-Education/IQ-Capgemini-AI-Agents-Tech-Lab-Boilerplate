@@ -42,3 +42,7 @@ tighten lines rather than adding more. Brevity is the deliverable.
 - **Freshness ≠ truth.** Flag single-source or unconfirmed items.
 - The model can't know what it didn't fetch — name the sources/window so gaps are visible.
 - No paywalled content is reproduced; summarize and link.
+
+## After every run
+
+Apply the `self-improve` skill: ask the participant 2 short questions about this run and save the learnings to `memory/` — the next run must start smarter.

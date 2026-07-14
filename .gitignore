@@ -16,6 +16,7 @@ dist/
 
 # Next.js (web/)
 web/.next/
+web/.next-verify/
 web/out/
 web/next-env.d.ts
 

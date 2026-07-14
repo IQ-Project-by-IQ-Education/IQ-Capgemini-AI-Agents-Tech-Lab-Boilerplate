@@ -153,9 +153,12 @@ if (existsSync(rel("web/node_modules"))) {
     // execSync runs through a shell, which resolves `npm` → `npm.cmd` (via PATHEXT) on
     // Windows. Modern Node (CVE-2024-27980 mitigation) refuses to execFile a .cmd/.bat
     // directly and throws EINVAL.
+    // Build into .next-verify (see web/next.config.mjs) so a dev server already
+    // running on .next is never corrupted by the self-test.
     execSync("npm run build", {
       cwd: rel("web"),
       stdio: ["ignore", "pipe", "pipe"],
+      env: { ...process.env, NEXT_DIST_DIR: ".next-verify" },
     });
     console.log("\r  \x1b[32m✓\x1b[0m web app builds cleanly            ");
   } catch (e) {
@@ -178,6 +181,8 @@ if (existsSync(rel("web/node_modules"))) {
     stdio: "ignore",
     shell: true,
     detached: process.platform !== "win32",
+    // Same isolated build dir — never touch a running dev server's .next.
+    env: { ...process.env, NEXT_DIST_DIR: ".next-verify" },
   });
   const stopServer = () => {
     try {

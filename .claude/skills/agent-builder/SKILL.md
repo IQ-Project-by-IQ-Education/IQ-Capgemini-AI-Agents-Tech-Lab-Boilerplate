@@ -7,11 +7,28 @@ description: Use when the participant wants to create their own agent, design a 
 
 Turn a participant's idea into a **working agent file** in `.claude/agents/`, through a short guided interview. The participant is possibly non-technical: you carry all the tooling decisions; they only answer business questions.
 
-## Step 0 — Put the live Agent Flow on screen
+## Step 0 — Show the flow, right in the chat
 
-Before the first question, make sure the web app is running (`kick-off` skill) and tell the participant to open **http://localhost:3000/flow** next to their terminal. Then, **after every answer**, rewrite `agent-flow.mmd` at the repo root (Mermaid `flowchart TD`, shape in `agent-flow.example.mmd`): the page redraws it within 2 seconds, so they watch their agent take shape as they speak.
+The participant must never have to switch windows to follow their agent taking shape. The flow lives in two places:
 
-Flow rules: map the **key actions** (inputs → agent steps in a subgraph → deliverable → feedback → memory loop back to onboarding), max ~10 nodes, plain-language labels (no commas inside `[...]` node labels, they break Mermaid — split into two nodes or rephrase). Represent still-unanswered parts as dashed nodes labeled `?`, and replace them as answers land. Write the file silently, no need to narrate each update.
+**1. In the chat (primary).** After **every answer**, redraw a compact ASCII flow directly in your message, just before the next question. House style, inside a code fence, max ~12 lines, `?` marks what's still undecided:
+
+```
+   ? inputs
+       ↓
+  ┌ PPTX Maker agent ──────────────┐
+  │ 1. Shape the story into slides │
+  │ 2. Render in the brand style   │
+  └────────────────────────────────┘
+       ↓
+  deck, ready to present
+       ↓
+  your feedback (2 questions) ⟲ long-term memory → next run starts smarter
+```
+
+**2. In the browser (projector / second screen).** Mirror the same flow to `agent-flow.mmd` at the repo root (Mermaid `flowchart TD`, shape in `agent-flow.example.mmd`, no commas inside `[...]` node labels): **http://localhost:3000/flow** redraws it within 2 seconds. Don't print the link and hope, **open it for them**: `open <url>` on macOS, `Start-Process <url>` in Windows PowerShell, `xdg-open <url>` on Linux. Update the file silently; the chat version is the one you narrate.
+
+Map the **key actions**: inputs → agent steps → deliverable → feedback → memory loop back to onboarding. Same structure in both renderings.
 
 ## Step 1 — Interview (one question at a time, max 5)
 

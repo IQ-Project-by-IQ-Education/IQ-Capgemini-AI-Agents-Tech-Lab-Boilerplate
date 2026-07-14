@@ -26,7 +26,15 @@ Run the [`test-repo`](../test-repo/SKILL.md) skill — i.e. `npm test` — to co
 npm run web:dev
 ```
 
-Then open **http://localhost:3000**. The server runs in the foreground; keep it in its own terminal (or run it in the background) and stop it with `Ctrl+C`.
+The server runs in the foreground; keep it in its own terminal (or run it in the background) and stop it with `Ctrl+C`.
+
+**Then open the browser for the participant — never just print the link** (many won't know to click it). Once http://localhost:3000 answers:
+
+| macOS | Windows (PowerShell) | Linux |
+| --- | --- | --- |
+| `open http://localhost:3000` | `Start-Process http://localhost:3000` | `xdg-open http://localhost:3000` |
+
+The welcome page walks them through the lab from there.
 
 ## Troubleshooting
 

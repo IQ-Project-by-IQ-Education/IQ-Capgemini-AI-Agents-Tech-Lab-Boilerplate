@@ -20,8 +20,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <header className="site-header">
           <Link href="/" className="brand">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/capgemini-logo.webp" alt="Capgemini" className="brand-logo" />
+            <span className="brand-plate">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/capgemini-logo.webp" alt="Capgemini" className="brand-logo" />
+            </span>
             <span className="brand-text">
               AI Agents Tech <span className="brand-sub">· Lab</span>
             </span>

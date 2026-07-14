@@ -65,6 +65,7 @@ for (const s of [
   "self-improve",
   "capgemini-brand",
   "showcase",
+  "cv-demo",
 ]) {
   need(`.claude/skills/${s}/SKILL.md`, `${s}`);
 }

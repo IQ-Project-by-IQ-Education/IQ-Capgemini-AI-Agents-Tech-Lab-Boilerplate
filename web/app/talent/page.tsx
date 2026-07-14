@@ -22,9 +22,9 @@ export default async function TalentPage() {
         <div className="empty">
           <p>Nothing here yet — and that&apos;s normal.</p>
           <p>
-            This page fills up if you build a CV-scoring agent. Tell Claude Code:{" "}
-            <strong>“I want to build my agent”</strong> and describe a CV-screening job — a
-            sales CV bank and job offer are already included. Then refresh this page.
+            This page fills up during the <strong>live CV-scoring demo</strong>: one agent
+            screens 20 CVs, argues its top 5, re-ranks after spoken feedback — and remembers
+            your preferences for next time.
           </p>
         </div>
       )}

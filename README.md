@@ -49,7 +49,7 @@ The project folders hold the **data and briefs** behind the pre-defined agents, 
 | --- | --- | --- | --- |
 | **Radar** — Press ⭐ | [`projects/2-radar-press-synthesis`](projects/2-radar-press-synthesis) | The `press-release` agent & press briefings | Public news (Tavily / web search) |
 | **Deck** — Professional PPTX | [`projects/3-deck-pptx-creation`](projects/3-deck-pptx-creation) | The `deck-maker` agent: executive decks in the house style | Your notes / another agent's output + brand tokens |
-| **Talent** — CV scoring | [`projects/1-talent-cv-scoring`](projects/1-talent-cv-scoring) | A **custom** CV-scoring agent, if a participant wants one (via `agent-builder`) | 116 anonymized sales CVs + matched job offer (provided) |
+| **Talent** — CV scoring | [`projects/1-talent-cv-scoring`](projects/1-talent-cv-scoring) | The **instructor's live demo** (`cv-demo` skill): screen 20 CVs → shortlist → voice feedback → re-rank → memory | 116 anonymized sales CVs + matched job offer (provided) |
 
 ⭐ = demonstrable end-to-end with public data, no internal Capgemini data required.
 
@@ -100,6 +100,7 @@ All skills live **inside this repo** under `.claude/skills/` and are loaded auto
 | **capgemini-brand** | Capgemini editorial voice + visual identity for anything client-facing. |
 | **test-repo** | One-command environment check (`npm test`), cross-platform macOS/Windows with per-OS fixes. |
 | **kick-off** | Install all dependencies and launch the local web app. |
+| **cv-demo** | Instructor-only: the scripted live CV demo — screen, shortlist, voice feedback, re-rank, remember. |
 | **cv-scoring** | House-style scoring grid + ranking output (Talent). |
 | **press-synthesis** | Raw news → executive briefing (Radar). |
 | **deck-builder** | JSON deck spec → themed `.pptx` (Deck). |

@@ -38,6 +38,7 @@ Both read `memory/MEMORY.md` on start and end each run with 2 improvement questi
 - `capgemini-brand` — editorial voice + visual identity for anything client-facing (press release, deck, web).
 - `test-repo` — verify the whole environment works (`npm test`), cross-platform macOS/Windows, with per-OS fix commands.
 - `kick-off` — install all dependencies and launch the local web app (`npm run web:dev`).
+- `cv-demo` — **instructor-only**: the scripted live CV-scoring demo (screen → shortlist → voice feedback → re-rank → memory written on screen).
 
 **Craft skills:**
 
@@ -64,9 +65,10 @@ Project folders hold the **data and briefs** behind the pre-defined agents, plus
 - **`2-radar-press-synthesis`** — themes + news tooling; its `output/` hosts briefings and press releases. Feeds `press-release`.
 - **`3-deck-pptx-creation`** — deck rendering + Capgemini brand tokens (`brand/capgemini-brand.md`). Feeds `deck-maker`.
 
-## Demos (instructor-only — `demos/`)
+## Demos (instructor-only)
 
-The **memory × skill crossover**: review `demos/nda-review/contracts/sample-nda.md` with `nda-analysis` — it catches a deal-breaker (data routed through Google Cloud) **only because it reads the memory** (`memory/it-stack.md`, "Microsoft/Azure only"). Same skill, no memory → it sails through. Experience changes judgment.
+- **CV demo** — the headline live demo ("One agent sorts 20 CVs, then remembers you"). Run it with the **`cv-demo`** skill: screen 20 CVs in one pass → argue a top-5 → spoken feedback → re-rank → **write the learning to `memory/` on screen**. The CV data (`projects/1-talent-cv-scoring/`) exists for this demo; participants don't build on it.
+- **Memory × skill crossover** (`demos/`): review `demos/nda-review/contracts/sample-nda.md` with `nda-analysis` — it catches a deal-breaker (data routed through Google Cloud) **only because it reads the memory** (`memory/it-stack.md`, "Microsoft/Azure only"). Same skill, no memory → it sails through. Experience changes judgment.
 
 ## Front-end (`web/`)
 

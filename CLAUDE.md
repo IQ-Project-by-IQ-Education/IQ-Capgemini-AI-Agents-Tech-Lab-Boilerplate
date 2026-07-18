@@ -37,6 +37,7 @@ Both read `memory/MEMORY.md` on start and end each run with 2 improvement questi
 - `showcase` — end-of-lab demo frontend from the agent's outputs (**requires** `frontend-design` + `capgemini-brand`).
 - `capgemini-brand` — editorial voice + visual identity for anything client-facing (press release, deck, web).
 - `test-repo` — verify the whole environment works (`npm test`), cross-platform macOS/Windows, with per-OS fix commands.
+- `debug` — whenever anything breaks mid-lab (blank page, failing command, agent output gone wrong): triage by layer, root cause before any fix, demo-mode rollback floor.
 - `kick-off` — install all dependencies and launch the local web app (`npm run web:dev`).
 - `cv-demo` — **instructor-only**: the scripted live CV-scoring demo (screen → shortlist → voice feedback → re-rank → memory written on screen).
 

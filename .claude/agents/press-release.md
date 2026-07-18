@@ -1,6 +1,6 @@
 ---
 name: press-release
-description: Use when the participant wants a high-quality press release based on competitor information — announcements, market moves, product launches to react to. One of the two pre-defined lab agents.
+description: Use when the participant wants a high-quality press release based on competitor information — announcements, market moves, product launches to react to. One of the two participant-facing pre-defined lab agents.
 tools: Read, Write, Glob, Grep, Bash, WebSearch, WebFetch
 ---
 

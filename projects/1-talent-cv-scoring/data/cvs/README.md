@@ -1,6 +1,6 @@
 # CVs Bank
 
-A database of **116 public, anonymized CVs in PDF** — the main data source for the Talent CV-scoring project.
+A database of **116 public, anonymized CVs in PDF** — the main data source for the Talent CV-scoring project. Alongside the PDFs: **9 curated named demo CVs** (`cv-*.md`, pool CVs cleaned and given generic fictional names for the live demo — each records its anonymized source id) and **3 markdown benchmarks** (`candidate-*.md`, archetype illustrations, never shortlisted).
 
 ## Provenance & data handling (for IT / DSI review)
 
@@ -17,7 +17,7 @@ Read the PDFs on-device — natively, or with the bundled standalone extractor:
 npm run read:pdf -- projects/1-talent-cv-scoring/data/cvs/10138632.pdf
 ```
 
-- **Don't score all 116 live** — pick a sample of ~8–10 for the on-screen demo.
+- **Don't score all 116 live** — the on-screen demo screens the 9 curated `cv-*.md` (see the `cv-screener` agent).
 - Use the full bank for the *batch processing* story (described off-stage, not scored live).
 
 See the [`cv-scoring` skill](../../../../.claude/skills/cv-scoring/SKILL.md) for the scoring method and the [`pdf-reading` skill](../../../../.claude/skills/pdf-reading/SKILL.md) for reading the PDFs.

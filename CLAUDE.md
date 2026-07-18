@@ -24,8 +24,9 @@ The conceptual spine is **"an agent is a new hire"** (instructions = rulebook, t
 
 - **`press-release`** — produces a high-quality press release from competitor information (web search / `npm run fetch:news`), following `capgemini-brand`.
 - **`deck-maker`** — builds a professional PowerPoint from notes, a topic, or another agent's output (`deck-builder` + `capgemini-brand`; rendered via `npm run build:deck`).
+- **`cv-screener`** *(instructor-only)* — powers the live CV demo (the `cv-demo` skill): screens the curated 9-CV sample against the sales offer, shortlists a top 5 with evidence, re-ranks on spoken feedback. Not a participant fallback.
 
-Both read `memory/MEMORY.md` on start and end each run with 2 improvement questions. Participant agents built with `agent-builder` follow the same shape.
+All three read `memory/MEMORY.md` on start and end each run with 2 improvement questions. Participant agents built with `agent-builder` follow the same shape.
 
 ## Skills available (`.claude/skills/`)
 
@@ -62,14 +63,14 @@ All skills are bundled in this repo — no marketplace or plugin install needed.
 
 Project folders hold the **data and briefs** behind the pre-defined agents, plus a third use case:
 
-- **`1-talent-cv-scoring`** — CV bank (116 anonymized sales PDFs + 3 markdown smoke-test CVs `candidate-*.md`) and the sales job offer. Data for a **custom** CV-scoring agent (via `agent-builder` + the `cv-scoring` skill) — not part of the quick-start path.
+- **`1-talent-cv-scoring`** — CV bank (116 anonymized sales PDFs + 9 curated named demo CVs `cv-*.md` + 3 markdown benchmarks `candidate-*.md`) and the sales job offer. Primarily the data behind the instructor CV demo (`cv-screener` agent); a participant can still build a **custom** scorer on it (via `agent-builder` + the `cv-scoring` skill) — not part of the quick-start path.
 - **`2-radar-press-synthesis`** — themes + news tooling; its `output/` hosts briefings and press releases. Feeds `press-release`.
 - **`3-deck-pptx-creation`** — deck rendering + Capgemini brand tokens (`brand/capgemini-brand.md`). Feeds `deck-maker`.
 
 ## Demos (instructor-only)
 
-- **CV demo** — the headline live demo ("One agent sorts 20 CVs, then remembers you"). Run it with the **`cv-demo`** skill: screen 20 CVs in one pass → argue a top-5 → spoken feedback → re-rank → **write the learning to `memory/` on screen**. The CV data (`projects/1-talent-cv-scoring/`) exists for this demo; participants don't build on it.
-- **Memory × skill crossover** (`demos/`): review `demos/nda-review/contracts/sample-nda.md` with `nda-analysis` — it catches a deal-breaker (data routed through Google Cloud) **only because it reads the memory** (`memory/it-stack.md`, "Microsoft/Azure only"). Same skill, no memory → it sails through. Experience changes judgment.
+- **CV demo** — the headline live demo ("One agent screens the CV pool, then remembers you"). Run it with the **`cv-demo`** skill, powered by the `cv-screener` agent: screen the 9 curated demo CVs (116 in the pool) in one pass → argue a top-5 → spoken feedback → re-rank → **write the learning to `memory/` on screen**. The CV data (`projects/1-talent-cv-scoring/`) exists for this demo; participants don't build on it.
+- **Memory × skill crossover** (`demos/`): review `demos/nda-review/contracts/sample-nda.md` with `nda-analysis` — it catches a deal-breaker (data routed through Google Cloud) **only because it reads the memory** (`demos/nda-review/memory/it-stack.md`, "Microsoft/Azure only"). Same skill, no memory → it sails through. Experience changes judgment.
 
 ## Front-end (`web/`)
 
@@ -80,7 +81,7 @@ A Next.js app renders each project's `output/`. **In-app browser first:** when t
 - **Environment check:** `npm test` (see `test-repo` skill) — run it if anything seems broken.
 - **News freshness:** `npm run fetch:news -- "<query>"` (Tavily / NewsAPI, keys in `.env`; explains what's missing if no key). Prefer your own web search when faster.
 - **Deck rendering:** `npm run build:deck -- <deck.json> [out.pptx]` — you write the JSON spec, the script renders the house theme.
-- **PDF reading:** `npm run read:pdf -- <file.pdf>` — pure JS, offline. For a live CV demo, sample ~8–10 rather than all 116.
+- **PDF reading:** `npm run read:pdf -- <file.pdf>` — pure JS, offline. For a live CV demo, use the 9 curated `cv-*.md` rather than all 116.
 
 ## Output conventions
 

@@ -1,6 +1,6 @@
 ---
 name: cv-screener
-description: Screens and ranks a pool of anonymized sales CVs against the Sales Account Executive job offer, shortlists the top 5 with evidence, re-ranks on spoken feedback, remembers preferences in memory/, and presents results in a small self-contained front-end board. Use when Nathan says "screen the CVs", "run the triage", "re-rank", or gives feedback on a shortlist.
+description: Screens and ranks a pool of anonymized sales CVs against the Sales Account Executive job offer, shortlists the top 5 with evidence, re-ranks on spoken feedback, remembers preferences in memory/, and presents results in a small self-contained front-end board. Use when the instructor says "screen the CVs", "run the triage", "re-rank", or gives feedback on a shortlist.
 tools: Read, Glob, Grep, Write, Edit, Bash
 model: sonnet
 ---
@@ -51,9 +51,10 @@ and at least one key account grown through a measurable upsell.
 Before any screening, read `memory/MEMORY.md` (the index) and any `memory/*.md` learning
 relevant to CV screening. They hold the hiring manager's accumulated preferences; they
 **override** default weighting. After every feedback round, record new preferences the lab way
-(the `self-improve` convention): one short file `memory/cv-screener-<slug>.md` per learning
-(dated bullets) **plus** a one-line pointer added to `memory/MEMORY.md`. Never delete old
-entries; never invent a preference that wasn't stated.
+(the `self-improve` convention): one short file `memory/<topic-slug>.md` per learning
+(dated bullets) **plus** a one-line pointer added to `memory/MEMORY.md`. Update an existing
+entry rather than duplicating it, delete one only if a run proves it wrong; never invent a
+preference that wasn't stated.
 
 # Workflow — the five passes
 
@@ -123,3 +124,15 @@ Log each pass: `npm run log:run -- 1-talent-cv-scoring "<result>" --input "<pass
 - PDF text extraction can carry OCR artifacts (e.g. `Â`, `â€¢`); clean them before quoting evidence.
 - Uncertain ≠ disqualified: flag missing information as an open question, don't silently penalize it.
 - Keep spoken-style summaries short; the front-end carries the detail.
+
+# Close the loop (mandatory)
+
+End every screening or re-rank report with a final section:
+
+```markdown
+### Getting better — 2 questions for you
+1. <one specific question about the substance — e.g. "Should CRM discipline weigh more than sector experience next run?">
+2. <one specific question about the form — e.g. "Is the top-5 card format right, or do you want the full table first?">
+```
+
+The answers must be saved to long-term memory via the `self-improve` skill so the next run starts smarter.

@@ -20,7 +20,7 @@ Read any PDF in this repo reliably, on-device. Two ways — use whichever works 
 
 ## When to use it here
 
-- **Talent / CV scoring:** read CVs from `projects/1-talent-cv-scoring/data/cvs/*.pdf`. For a live demo, extract a sample of ~8–10, not all 116.
+- **Talent / CV scoring:** read CVs from `projects/1-talent-cv-scoring/data/cvs/*.pdf`. For the live demo, use the 9 curated `cv-*.md` in the same folder, not a PDF sample of the 116.
 - **Deck / Capgemini branding:** the brand tokens are already summarized in `projects/3-deck-pptx-creation/brand/capgemini-brand.md`. If a participant supplies the full brand PDF, read it for logo rules and shapes.
 - Any other reference PDF a participant drops in.
 

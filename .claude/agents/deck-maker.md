@@ -1,6 +1,6 @@
 ---
 name: deck-maker
-description: Use when the participant wants a professional PowerPoint — an executive deck built from their notes, a topic, or another agent's output. One of the two pre-defined lab agents.
+description: Use when the participant wants a professional PowerPoint — an executive deck built from their notes, a topic, or another agent's output. One of the two participant-facing pre-defined lab agents.
 tools: Read, Write, Glob, Grep, Bash
 ---
 

@@ -49,7 +49,7 @@ The project folders hold the **data and briefs** behind the pre-defined agents, 
 | --- | --- | --- | --- |
 | **Radar** — Press ⭐ | [`projects/2-radar-press-synthesis`](projects/2-radar-press-synthesis) | The `press-release` agent & press briefings | Public news (Tavily / web search) |
 | **Deck** — Professional PPTX | [`projects/3-deck-pptx-creation`](projects/3-deck-pptx-creation) | The `deck-maker` agent: executive decks in the house style | Your notes / another agent's output + brand tokens |
-| **Talent** — CV scoring | [`projects/1-talent-cv-scoring`](projects/1-talent-cv-scoring) | The **instructor's live demo** (`cv-demo` skill): screen 20 CVs → shortlist → voice feedback → re-rank → memory | 116 anonymized sales CVs + matched job offer (provided) |
+| **Talent** — CV scoring | [`projects/1-talent-cv-scoring`](projects/1-talent-cv-scoring) | The **instructor's live demo** (`cv-demo` skill + `cv-screener` agent): screen the curated CV sample → shortlist → voice feedback → re-rank → memory | 116 anonymized sales CVs + matched job offer (provided) |
 
 ⭐ = demonstrable end-to-end with public data, no internal Capgemini data required.
 

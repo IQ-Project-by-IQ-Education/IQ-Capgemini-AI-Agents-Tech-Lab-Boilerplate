@@ -4,10 +4,20 @@ import { useEffect, useRef, useState } from "react";
 
 // Polls /api/flow every 2s and re-renders the Mermaid diagram when the file changes.
 // On a syntax error mid-edit, the last good diagram stays on screen.
+// "3s ago" / "2m ago" — coarse on purpose, refreshed at every poll.
+function formatAgo(ms: number): string {
+  const sec = Math.max(0, Math.round(ms / 1000));
+  if (sec < 60) return `${sec}s ago`;
+  const min = Math.round(sec / 60);
+  if (min < 60) return `${min}m ago`;
+  return `${Math.round(min / 60)}h ago`;
+}
+
 export function FlowViewer() {
   const [src, setSrc] = useState<string | null>(null);
   const [svg, setSvg] = useState<string>("");
   const [stale, setStale] = useState(false);
+  const [ago, setAgo] = useState<string | null>(null);
   const seq = useRef(0);
 
   useEffect(() => {
@@ -15,10 +25,11 @@ export function FlowViewer() {
     const tick = async () => {
       try {
         const res = await fetch("/api/flow", { cache: "no-store" });
-        const data = (await res.json()) as { content?: string };
+        const data = (await res.json()) as { content?: string; updatedAt?: number | null };
         if (active && typeof data.content === "string") {
           const content = data.content;
           setSrc((prev) => (prev === content ? prev : content));
+          setAgo(typeof data.updatedAt === "number" ? formatAgo(Date.now() - data.updatedAt) : null);
         }
       } catch {
         /* server briefly away; keep polling */
@@ -90,9 +101,14 @@ export function FlowViewer() {
 
   return (
     <>
-      {stale && <p className="source">Diagram is being updated…</p>}
+      {stale && (
+        <p className="source">Latest update couldn&apos;t be drawn, showing the previous version.</p>
+      )}
       <div className="flow-canvas" dangerouslySetInnerHTML={{ __html: svg }} />
-      <p className="source flow-hint">Redraws automatically as you answer, no refresh needed.</p>
+      <p className="source flow-hint">
+        Redraws automatically as you answer, no refresh needed.
+        {ago && <> · Flow last written {ago}.</>}
+      </p>
     </>
   );
 }

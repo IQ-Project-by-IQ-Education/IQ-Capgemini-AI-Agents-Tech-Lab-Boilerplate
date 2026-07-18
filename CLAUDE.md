@@ -73,7 +73,7 @@ Project folders hold the **data and briefs** behind the pre-defined agents, plus
 
 ## Front-end (`web/`)
 
-A Next.js app renders each project's `output/`. Run `npm run web:dev` → http://localhost:3000, then **open the browser for the participant** (`open`/`Start-Process`/`xdg-open`) — never just print a localhost link, many won't click it. During the design interview the agent flow is shown **in the chat** (compact ASCII, redrawn after each answer) and mirrored to the **/flow** page (`agent-flow.mmd`, Mermaid, repolled every 2s) for a projector or second screen. Upgrading the app with `showcase` at the end of the lab is a demo moment.
+A Next.js app renders each project's `output/`. **In-app browser first:** when the `mcp__Claude_Browser__*` tools are available (Claude Desktop), launch and open the app with `preview_start` `{name: "web"}` (config in `.claude/launch.json`) — the page lives right next to the chat. Otherwise run `npm run web:dev` → http://localhost:3000, then **open the browser for the participant** (`open`/`Start-Process`/`xdg-open`) — never just print a localhost link, many won't click it. During the design interview the agent flow is shown **in the chat** (compact ASCII, redrawn after each answer) and mirrored to the **/flow** page (`agent-flow.mmd`, Mermaid, repolled every 2s) for a projector or second screen. Upgrading the app with `showcase` at the end of the lab is a demo moment.
 
 ## Tooling
 

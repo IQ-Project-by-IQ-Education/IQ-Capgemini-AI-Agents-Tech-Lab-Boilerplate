@@ -28,7 +28,7 @@ Distill the feedback into **one memory line** (e.g. *"Prefer hands-on sales expe
 
 ## Staging notes
 
-- **Optional but strong opener**: before beat 01, write the five-beat flow to `agent-flow.mmd` (repo root, Mermaid, shape in `agent-flow.example.mmd`) and put **http://localhost:3000/flow** on the projector, the audience sees the plan before you run it.
+- **Optional but strong opener**: before beat 01, write the five-beat flow to `agent-flow.mmd` (repo root, Mermaid, shape in `agent-flow.example.mmd`) and put **http://localhost:3000/flow** on the projector, the audience sees the plan before you run it. In-app browser first: `preview_start` with `{url: "http://localhost:3000/flow"}` when the `mcp__Claude_Browser__*` tools are available, otherwise `open`/`Start-Process`/`xdg-open`.
 
 - Timebox: ~10 minutes. Beat 1 is the slowest — announce it ("20 CVs, one pass, give me a minute") and let the table land all at once.
 - Fallback if PDFs misbehave: the 3 markdown CVs (`candidate-*.md`) keep the flow alive.

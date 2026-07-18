@@ -22,13 +22,15 @@ Run the [`test-repo`](../test-repo/SKILL.md) skill — i.e. `npm test` — to co
 
 ## 3. Launch the dev server
 
+**In-app browser first (Claude Desktop).** If the in-app browser tools are available (`mcp__Claude_Browser__*`), do NOT launch the server with Bash: call `preview_start` with `{name: "web"}` (config in `.claude/launch.json`, port pinned to 3000 because every printed URL in the lab uses it). One call starts `npm run web:dev` *and* opens http://localhost:3000 in the panel right next to the chat — the participant never leaves the app, and `preview_logs` gives you the server logs when debugging. **Already running?** If port 3000 already answers (a server started earlier in a terminal), don't start a second one: just open the panel with `preview_start` `{url: "http://localhost:3000"}`.
+
+**Fallback (plain terminal, no browser tools):**
+
 ```bash
 npm run web:dev
 ```
 
-The server runs in the foreground; keep it in its own terminal (or run it in the background) and stop it with `Ctrl+C`.
-
-**Then open the browser for the participant — never just print the link** (many won't know to click it). Once http://localhost:3000 answers:
+The server runs in the foreground; keep it in its own terminal (or run it in the background) and stop it with `Ctrl+C`. **Then open the browser for the participant — never just print the link** (many won't know to click it). Once http://localhost:3000 answers:
 
 | macOS | Windows (PowerShell) | Linux |
 | --- | --- | --- |

@@ -9,7 +9,7 @@ For participants with **no use case in mind**. You ask three business questions,
 
 ## Step 0 — Show the plan, right in the chat
 
-After **each answer**, redraw the three-output pipeline as a compact ASCII flow directly in your message (code fence, max ~12 lines, `?` for the questions still unanswered) so the participant follows the plan without switching windows. Mirror the same flow to `agent-flow.mmd` at the repo root (Mermaid `flowchart TD`, shape in `agent-flow.example.mmd`, no commas inside `[...]` node labels): **http://localhost:3000/flow** redraws it within 2 seconds — and **open that page for them** (`open <url>` on macOS, `Start-Process <url>` on Windows, `xdg-open <url>` on Linux), never just print a link.
+After **each answer**, redraw the three-output pipeline as a compact ASCII flow directly in your message (code fence, max ~12 lines, `?` for the questions still unanswered) so the participant follows the plan without switching windows. Mirror the same flow to `agent-flow.mmd` at the repo root (Mermaid `flowchart TD`, shape in `agent-flow.example.mmd`, no commas inside `[...]` node labels): **http://localhost:3000/flow** redraws it within 2 seconds — and **open that page for them**, never just print a link: in-app browser first (`preview_start` with `{url: "http://localhost:3000/flow"}` when the `mcp__Claude_Browser__*` tools are available, `navigate` if the panel is already open), otherwise `open <url>` on macOS, `Start-Process <url>` on Windows, `xdg-open <url>` on Linux. **The `.mmd` Write is paired with every chat redraw, in the same turn, never one without the other** — a chat-only redraw leaves the projector frozen on a stale diagram.
 
 ## Step 1 — Three questions (one at a time, plain language)
 

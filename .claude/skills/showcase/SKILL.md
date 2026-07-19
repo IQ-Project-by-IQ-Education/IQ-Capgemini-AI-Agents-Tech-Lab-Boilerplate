@@ -12,7 +12,7 @@ The last lab step: a **frontend that presents the participant's agent output** f
 ## Process
 
 1. **Inventory the story.** List what the agent produced in `projects/*/output/` and `runs.json`. Pick with the participant the 1–2 outputs that carry the demo (the shortlist, the press release…).
-2. **Choose the surface.** Default: upgrade the existing Next.js app (`web/`) — the route that renders the agent's project output (`web/app/talent`, `web/app/radar`, `web/app/deck`), or a new route for a custom agent. It already reads `output/*.md`; keep that mechanism, redesign the presentation.
+2. **Choose the surface.** Default: upgrade the existing Next.js app (`web/`) — the route that renders the agent's project output (`web/app/talent`, `web/app/radar`, `web/app/deck`), or a new route for a custom agent. If `agent-builder` already created a dedicated route for this agent (Step 8), upgrade that route and keep its validated design direction (see the agent file's "Presentation" section). It already reads `output/*.md`; keep that mechanism, redesign the presentation.
 3. **Design & build** with `frontend-design`, constrained by `capgemini-brand`:
    - the deliverable's content is the hero — typography does the heavy lifting;
    - show the *agent* story too: a "Recent runs" strip (from `runs.json`) and, if there are memory entries, a small "What this agent has learned" panel — that's the wow moment;

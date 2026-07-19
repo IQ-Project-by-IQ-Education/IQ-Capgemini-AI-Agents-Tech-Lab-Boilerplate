@@ -77,7 +77,13 @@ Never surface the technical layer beyond this: no file formats, no frontmatter t
 
 Ask how the agent should sound and behave (friendly, formal, concise, proactive, cautious…). Default if no preference: **professional, concise, proactive**. In the same turn, ask for **one first real task** to test it on right after creation.
 
-## Step 5 — Generate the agent file
+## Step 5 — How it should look on screen (ask, then propose)
+
+The agent's outputs won't stay buried in files: they get their **own page in the lab web app**, and that page is a demo moment. One question, business terms only: "At the demo, your agent's results appear on the big screen. What should that moment feel like: a sharp boardroom brief, a product launch reveal, or a live mission control dashboard?" Those three are openers, let them answer freely.
+
+Translate their answer yourself into a one-line **design direction** (e.g. "bold editorial, dark background, oversized type, blue accents"). Restate it in plain words and get one confirmation. Never surface fonts, CSS or any design vocabulary: they describe a feeling, you carry the craft. The direction is written into the agent file (Step 6) and drives the page build (Step 8). Redraw the flow with a final "presented on the agent's page" node.
+
+## Step 6 — Generate the agent file
 
 Write `.claude/agents/<kebab-name>.md` following this template (same shape as `press-release.md` and `deck-maker.md` — read one for reference):
 
@@ -95,10 +101,13 @@ You are the **<Name> agent** — <one-sentence mission from Step 1>.
 2. <read the relevant skill(s) / data / guidelines — e.g. capgemini-brand for anything editorial>
 
 ## The job
-<the validated flow from Step 2: inputs → phases → deliverable. Write outputs to a `projects/*/output/` folder as Markdown so the web app renders them, and log the run with `npm run log:run`.>
+<the validated flow from Step 2: inputs → phases → deliverable. Write outputs to a `projects/*/output/` folder as Markdown so the web app renders them — they also feed the agent's dedicated page `/<kebab-name>` — and log the run with `npm run log:run`.>
 
 ## Personality
 <from Step 4 — how it sounds and behaves.>
+
+## Presentation
+<the design direction from Step 5, one line — it styles the agent's page at `web/app/<kebab-name>/page.tsx`.>
 
 ## Guardrails
 <the quality bar from Step 3a — plus: label unverified facts, no real personal data, decision support not decision.>
@@ -110,11 +119,24 @@ questions about this run. Answers are saved via the `self-improve` skill.
 
 The capability → tooling map from Step 3b drives the `tools:` line and the onboarding skill reads. Keep the tool list to the minimum the flow requires.
 
-## Step 6 — First run
+## Step 7 — First run
 
 1. Tell the participant their agent now exists and show the file.
 2. Run it immediately on the test task from Step 4 (invoke the agent, or follow its instructions directly).
 3. After the run, apply the `self-improve` skill — the first memory entry is the moment the "new hire" starts gaining experience. Name that moment out loud: it's the lab's core lesson.
+
+## Step 8 — Embed in the app (the wow moment)
+
+Right after the first run, turn the agent's output into a **dedicated page in the web app** — the moment the participant sees their agent become a product. Announce it, then build it yourself; the design direction was already validated in Step 5, no more questions needed.
+
+1. **Read `frontend-design` and `capgemini-brand` first.** Precedence for these pages: `frontend-design` leads — commit fully to the Step 5 direction (distinctive type treatment, motion, spatial composition, backgrounds). `capgemini-brand` contributes the accent colors (the `--cap-*` tokens already in `web/app/globals.css`) and the editorial voice only; the light-and-sober constraints of the showcase surface do not govern these pages.
+2. **Build `web/app/<kebab-name>/page.tsx`** — async server component with `export const dynamic = "force-dynamic"`. Reuse the existing plumbing, never reinvent it: `readLatestMarkdown("<project-dir>")` / `listOutputs` / `readRuns` from `@/lib/readOutput`, `renderMarkdown` from `@/lib/markdown`, the `<Runs>` strip from `@/components/Runs`, plus a styled empty state for when `output/` is still empty.
+3. **Style in `web/app/globals.css`**, appended under one page-level class (`.page-<kebab-name>`) so nothing leaks into other routes. No new dependencies, no Tailwind, offline-safe: no CDN fonts — distinctiveness comes from scale, weight, spacing, color and motion on the self-hosted stack.
+4. **Add the page to the `NAV` array** in `web/app/layout.tsx`, under the agent's name.
+5. **Open it for them** — in-app browser `preview_start`/`navigate` if available, otherwise `open http://localhost:3000/<kebab-name>` (`Start-Process` on Windows) — never just print the link.
+6. **Close the loop on the design too:** one quick question in participant terms ("anything you'd change about how this looks?"), saved via `self-improve`, in addition to the Step 7 run feedback.
+
+Time-box it (80/20): one page — a hero carrying the agent's name and mission, the latest output as the centerpiece, the runs strip below. If the direction risks the time budget, ship the strong-typography version first and refine only if time allows. The `showcase` skill can still upgrade this page at the end of the lab; keep the design direction consistent when it does.
 
 ## Watch out
 

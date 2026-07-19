@@ -17,7 +17,7 @@ The conceptual spine is **"an agent is a new hire"** (instructions = rulebook, t
 1. **Theory** *(instructor)* — the new-hire metaphor; the memory × skill demo lives in `demos/`.
 2. **Design** — the participant describes the agent they want. Use the **`agent-builder`** skill: a short guided interview, one question at a time. **No idea at all?** Use the **`quick-start`** skill: three business questions, then you generate every output for them (press release, briefing, deck) — zero technical vocabulary.
 3. **Create** — generate the agent as a markdown file in **`.claude/agents/<name>.md`** (agent-builder does this; template inside it).
-4. **Run & iterate** — invoke the agent on real tasks. After every run: **`self-improve`** → record learnings in `memory/` → visibly apply them on the next run ("scoring CRM higher this time, as you asked").
+4. **Run & iterate** — invoke the agent on real tasks. Right after the first run, `agent-builder` embeds the output as the agent's own page in the web app (its Step 8, wow effect via `frontend-design`). After every run: **`self-improve`** → record learnings in `memory/` → visibly apply them on the next run ("scoring CRM higher this time, as you asked").
 5. **Showcase** — use the **`showcase`** skill to turn the agent's outputs into a polished, Capgemini-branded web page (`frontend-design` + `capgemini-brand`) for the final demo.
 
 ## Pre-defined agents (`.claude/agents/`) — the fallback choice
@@ -32,7 +32,7 @@ All three read `memory/MEMORY.md` on start and end each run with 2 improvement q
 
 **Lab-flow skills:**
 
-- `agent-builder` — guided interview → generates the participant's agent file in `.claude/agents/`.
+- `agent-builder` — guided interview → generates the participant's agent file in `.claude/agents/`; includes one non-technical design question, then embeds the agent's output as a dedicated wow page in the web app after the first run (`frontend-design` leads, `capgemini-brand` accents).
 - `quick-start` — for participants with no idea: 3 business questions → all outputs generated (press release, briefing, deck), no technical vocabulary.
 - `self-improve` — after every run: 2 feedback questions → learnings written to `memory/`.
 - `showcase` — end-of-lab demo frontend from the agent's outputs (**requires** `frontend-design` + `capgemini-brand`).

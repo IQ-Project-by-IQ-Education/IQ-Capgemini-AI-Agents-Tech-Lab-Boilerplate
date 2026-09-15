@@ -37,9 +37,34 @@ The participant must never switch windows to follow their agent taking shape. Th
   your feedback (2 questions) ⟲ long-term memory → next run starts smarter
 ```
 
-**2. In the browser (projector / second screen).** Mirror the same flow to `agent-flow.mmd` at the repo root (Mermaid `flowchart TD`, shape in `agent-flow.example.mmd`, no commas inside `[...]` node labels): **http://localhost:3000/flow** redraws it within 2 seconds. Don't print the link and hope, **open it for them, once, at the first drawing** — in-app browser first: if the `mcp__Claude_Browser__*` tools are available (Claude Desktop), use `preview_start` with `{url: "http://localhost:3000/flow"}` (or `navigate` if the panel is already open) so the flow lives right next to the chat; only without those tools, fall back to `open <url>` on macOS, `Start-Process <url>` in Windows PowerShell, `xdg-open <url>` on Linux. If localhost:3000 isn't running, use the `kick-off` skill first (it starts in a second, nothing to install). **The `.mmd` Write happens in the same turn as every chat redraw, without exception** — a chat-only redraw leaves the projector frozen on a stale diagram, which reads as "broken" to the room. Update the file silently; the chat version is the one you narrate.
+**2. In the browser (projector / second screen).** Mirror the same flow to `agent-flow.mmd` at the repo root (Mermaid `flowchart TD`, shape in `agent-flow.example.mmd`, no commas inside `[...]` node labels): **http://localhost:3000/flow** redraws it within 2 seconds. That page is already open next to the chat since Step 0 (the app runs without any install). **The `.mmd` Write happens in the same turn as every chat redraw, without exception** — a chat-only redraw leaves the projector frozen on a stale diagram, which reads as "broken" to the room. Update the file silently; the chat version is the one you narrate.
 
-The first (mostly-`?`) drawing accompanies your very first question. The bottom line — feedback ⟲ memory → next run starts smarter — is part of the template, keep it in every drawing. Never paste raw Mermaid in the chat — the chat gets the ASCII version, the `.mmd` file feeds the browser.
+The first (mostly-`?`) drawing is written in Step 0 and accompanies your very first question. The bottom line — feedback ⟲ memory → next run starts smarter — is part of the template, keep it in every drawing. Never paste raw Mermaid in the chat — the chat gets the ASCII version, the `.mmd` file feeds the browser.
+
+## Step 0 — Open the stage (before the first question, no exceptions)
+
+The participant must see their agent's flow draw itself **without doing anything**. So, as the very first thing this skill does, before any question:
+
+1. **Is the web app running?** Check port 3000 (`curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/api/flow` on macOS/Linux, `Invoke-WebRequest http://localhost:3000/api/flow` in PowerShell). Nothing to install either way: the app is static, served by `scripts/serve.mjs`.
+2. **Not running?** Start it: in Claude Desktop, `preview_start` with `{name: "web"}` (config in `.claude/launch.json`); otherwise `npm run web:dev` in the background. It answers within a second.
+3. **Write the first drawing** to `agent-flow.mmd` at the repo root, the mostly-`?` skeleton below, so the page never shows its empty state:
+
+```
+flowchart TD
+  A[/? inputs/] --> B
+  subgraph agent [? Your agent]
+    B[? step 1] --> C[? step 2]
+  end
+  C --> D([? deliverable])
+  D --> F{{Your feedback in 2 questions}}
+  F -. writes a learning .-> M[(Long-term memory)]
+  M -. read at onboarding .-> B
+```
+
+4. **Open the flow page for them**, in the in-app browser first: `preview_start` with `{url: "http://localhost:3000/flow"}` (or `navigate` to it if the panel is already open on another page). Without the in-app browser tools: `open http://localhost:3000/flow` on macOS, `Start-Process http://localhost:3000/flow` in Windows PowerShell, `xdg-open http://localhost:3000/flow` on Linux. Never just print the link.
+5. Say one sentence: "Your agent's flow will draw itself on the right as we talk." Then ask the first question.
+
+If any of this fails (port busy, panel not opening), don't stall the interview: say so in one line, fall back to the chat-only ASCII flow, and fix it after the interview with the `debug` skill.
 
 ## Step 1 — Identity & core capability (ask)
 

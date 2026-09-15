@@ -1,0 +1,39 @@
+<!doctype html>
+<!-- Template for a participant agent's page (agent-builder, Step 8).
+     Copy to site/<kebab-name>.html, replace the four ALL-CAPS placeholders, add the page to
+     site/nav.json, then style it: everything under .page-<kebab-name> below is yours to
+     redesign with the frontend-design skill. Offline-safe: no CDN fonts, no new libraries. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AGENT NAME · AI Agents Tech Lab</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    /* Page-level styles, scoped so nothing leaks into other routes. */
+    .page-AGENT-KEBAB .agent-hero { padding: 1rem 0 2.4rem; }
+    .page-AGENT-KEBAB .agent-hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 700; letter-spacing: -0.02em; margin: 0.4rem 0; color: var(--white); }
+    .page-AGENT-KEBAB .agent-hero .mission { max-width: 44rem; color: var(--muted); font-size: 1.1rem; }
+  </style>
+</head>
+<body class="page-AGENT-KEBAB">
+  <main class="site-main">
+    <section class="agent-hero">
+      <p class="kicker">Your agent</p>
+      <h1>AGENT NAME</h1>
+      <p class="mission">ONE-SENTENCE MISSION.</p>
+    </section>
+    <div id="app"></div>
+  </main>
+  <script src="/assets/app.js"></script>
+  <script>
+    LabSite.ready.then(() => LabSite.mountDoc({
+      project: "PROJECT-DIR",            // the projects/<dir> this agent writes its output/ to
+      tag: "Latest output",
+      title: "What it produced",
+      empty: "<p>No output yet.</p><p>Run the agent once and its deliverable appears here.</p>",
+    }));
+  </script>
+</body>
+</html>

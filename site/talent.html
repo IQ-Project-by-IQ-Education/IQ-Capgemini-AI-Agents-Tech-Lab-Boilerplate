@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Talent · AI Agents Tech Lab</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <main class="site-main"><div id="app"></div></main>
+  <script src="/assets/app.js"></script>
+  <script>
+    LabSite.ready.then(() => LabSite.mountDoc({
+      project: "1-talent-cv-scoring",
+      tag: "Talent",
+      title: "CV scorecard",
+      empty: "<p>Nothing here yet, and that's normal.</p><p>This page fills up during the <strong>live CV-scoring demo</strong>: one agent screens the CV pool, argues its top 5, re-ranks after spoken feedback, and remembers your preferences for next time.</p>",
+    }));
+  </script>
+</body>
+</html>

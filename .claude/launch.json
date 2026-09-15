@@ -3,8 +3,15 @@
   "configurations": [
     {
       "name": "web",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["scripts/serve.mjs"],
+      "port": 3000,
+      "autoPort": false
+    },
+    {
+      "name": "web-next",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "web:dev"],
+      "runtimeArgs": ["run", "web:next"],
       "port": 3000,
       "autoPort": false
     }

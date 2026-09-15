@@ -41,10 +41,17 @@ if (nodeMajor >= 20) ok(`Node ${process.version}`);
 else fail(`Node ${process.version} — the lab needs Node 20 or newer`);
 
 // ── Root dependencies ───────────────────────────────────────────────────────
-section("Dependencies (root) — from `npm install`");
+// Only decks (pptxgenjs) and PDF reading (pdfjs-dist) need them. The web app, the agents,
+// the skills and the memory loop all run without any install — a missing install is a
+// warning, not a failure, so the lab never blocks on a slow corporate network.
+section("Dependencies (root) — from `npm install` (decks + PDF reading only)");
+let rootDepsOk = true;
 for (const dep of ["pdfjs-dist", "pptxgenjs", "tsx", "typescript"]) {
   if (existsSync(rel(`node_modules/${dep}`))) ok(dep);
-  else fail(`${dep} not installed — run \`npm install\` at the repo root`);
+  else {
+    warn(`${dep} not installed — needed for decks / PDF reading only (run \`npm install\` at the repo root)`);
+    rootDepsOk = false;
+  }
 }
 
 // ── Skills ──────────────────────────────────────────────────────────────────
@@ -111,8 +118,11 @@ need("references/knowledge-work-legal/triage-nda.SKILL.md", "knowledge-work lega
 
 // ── Functional smoke (offline) ─────────────────────────────────────────────────
 section("Functional smoke (offline)");
+if (!rootDepsOk) {
+  warn("skipping PDF + deck smoke tests (root deps not installed)");
+}
 // 1. PDF reading really works (Node + pdfjs).
-try {
+if (rootDepsOk) try {
   const cvDir = rel("projects/1-talent-cv-scoring/data/cvs");
   const firstCv = readdirSync(cvDir).find((f) => f.toLowerCase().endsWith(".pdf"));
   if (!firstCv) throw new Error("no CV to test");
@@ -126,7 +136,7 @@ try {
   fail(`read:pdf failed — ${String(e.message ?? e).split("\n")[0]}`);
 }
 // 2. Deck rendering dependency loads and renders (pptxgenjs), in-memory, no disk.
-try {
+if (rootDepsOk) try {
   const Pptx = (await import("pptxgenjs")).default;
   const deck = new Pptx();
   deck.addSlide().addText("AI Agents Tech — Lab", { x: 1, y: 1 });
@@ -137,66 +147,40 @@ try {
   fail(`deck rendering failed — ${String(e.message ?? e).split("\n")[0]}`);
 }
 
-// ── Front-end (web/) ────────────────────────────────────────────────────────────
-section("Front-end (web/)");
-need("web/package.json", "web app present");
-need("web/public/capgemini-logo.webp", "Capgemini logo");
+// ── Front-end (site/ + scripts/serve.mjs) ─────────────────────────────────────
+// The lab web app is static HTML served by a zero-dependency Node server: nothing to
+// install, nothing to build. This boots it on a dedicated port (so a server already running
+// on 3000 doesn't interfere), checks the exact pages a participant sees, then stops it.
+section("Front-end (site/) — static app, no install needed");
+need("scripts/serve.mjs", "static server script");
+need("site/index.html", "welcome page");
+need("site/flow.html", "live Agent Flow page");
+need("site/assets/site.css", "shared stylesheet");
+need("site/assets/app.js", "page runtime");
+need("site/vendor/mermaid.min.js", "Mermaid (vendored, offline)");
+need("site/assets/capgemini-logo.webp", "Capgemini logo");
 try {
-  const layout = readFileSync(rel("web/app/layout.tsx"), "utf8");
-  if (layout.includes("AI Agents Tech")) ok('lab title wired ("AI Agents Tech — Lab")');
-  else fail("lab title not found in web/app/layout.tsx");
+  const html = readFileSync(rel("site/index.html"), "utf8");
+  if (html.includes("you build your own AI agent")) ok("participants' welcome message is on the page");
+  else fail("welcome message not found in site/index.html");
 } catch {
-  fail("web/app/layout.tsx missing");
+  fail("site/index.html missing");
 }
-if (existsSync(rel("web/node_modules"))) {
-  process.stdout.write("  … building the web app (~20s) … ");
-  try {
-    // execSync runs through a shell, which resolves `npm` → `npm.cmd` (via PATHEXT) on
-    // Windows. Modern Node (CVE-2024-27980 mitigation) refuses to execFile a .cmd/.bat
-    // directly and throws EINVAL.
-    // Build into .next-verify (see web/next.config.mjs) so a dev server already
-    // running on .next is never corrupted by the self-test.
-    execSync("npm run build", {
-      cwd: rel("web"),
-      stdio: ["ignore", "pipe", "pipe"],
-      env: { ...process.env, NEXT_DIST_DIR: ".next-verify" },
-    });
-    console.log("\r  \x1b[32m✓\x1b[0m web app builds cleanly            ");
-  } catch (e) {
-    console.log("\r  \x1b[31m✗\x1b[0m web app build failed              ");
-    const out = (String(e.stdout ?? "") + String(e.stderr ?? "")).trim();
-    const detail = out || String(e.message ?? e);
-    console.log("    " + detail.split("\n").slice(-6).join("\n    "));
-    failures++;
-  }
-
-  // End-to-end: boot the dev server and check the participants' welcome page — the exact
-  // flow a participant runs on lab day (`npm run web:dev` → http://localhost:3000).
-  process.stdout.write("  … booting the dev server — welcome page check (~15s) … ");
-  const PORT = 3100; // dedicated port, so a dev server already running on 3000 doesn't interfere
-  // Single command string + shell:true — resolves npm→npm.cmd on Windows without tripping
-  // DEP0190. detached on POSIX makes the server its own process group so we can kill
-  // npm AND next; taskkill /T does that job on Windows.
-  const server = spawn(`npm run dev -- --port ${PORT}`, {
-    cwd: rel("web"),
+{
+  process.stdout.write("  … booting the web app — welcome page check (~3s) … ");
+  const PORT = 3100;
+  const server = spawn(process.execPath, [rel("scripts/serve.mjs"), "--port", String(PORT)], {
+    cwd: root,
     stdio: "ignore",
-    shell: true,
-    detached: process.platform !== "win32",
-    // Same isolated build dir — never touch a running dev server's .next.
-    env: { ...process.env, NEXT_DIST_DIR: ".next-verify" },
   });
   const stopServer = () => {
     try {
-      if (process.platform === "win32") {
-        execFileSync("taskkill", ["/pid", String(server.pid), "/T", "/F"], { stdio: "ignore" });
-      } else {
-        process.kill(-server.pid, "SIGTERM");
-      }
+      server.kill("SIGTERM");
     } catch {}
   };
   try {
+    const deadline = Date.now() + 20_000;
     let html = "";
-    const deadline = Date.now() + 90_000;
     for (;;) {
       try {
         const res = await fetch(`http://localhost:${PORT}/`);
@@ -205,27 +189,64 @@ if (existsSync(rel("web/node_modules"))) {
           break;
         }
       } catch {}
-      if (Date.now() > deadline) throw new Error(`dev server did not answer on port ${PORT} within 90s`);
-      await new Promise((r) => setTimeout(r, 1000));
+      if (Date.now() > deadline) throw new Error(`web app did not answer on port ${PORT} within 20s`);
+      await new Promise((r) => setTimeout(r, 250));
     }
-    console.log(`\r  \x1b[32m✓\x1b[0m dev server boots and serves the home page (port ${PORT})   `);
-    if (html.includes("you build your own AI agent")) ok("participants' welcome message is on the page");
-    else fail("welcome message not found on the home page — check web/app/page.tsx");
-    const logo = await fetch(`http://localhost:${PORT}/capgemini-logo.webp`);
-    if (logo.ok) ok("Capgemini logo is served");
-    else fail(`Capgemini logo not served (HTTP ${logo.status}) — check web/public/capgemini-logo.webp`);
-    const flow = await fetch(`http://localhost:${PORT}/flow`);
-    if (flow.ok) ok("live Agent Flow page responds");
-    else fail(`Agent Flow page failed (HTTP ${flow.status}) — check web/app/flow`);
+    console.log(`\r  \x1b[32m✓\x1b[0m web app boots and serves the home page (port ${PORT})   `);
+    if (html.includes("you build your own AI agent")) ok("welcome message is served");
+    else fail("welcome message not found on the served home page");
+    const checks = [
+      ["/flow", "live Agent Flow page responds"],
+      ["/radar", "Radar page responds"],
+      ["/deck", "Deck page responds"],
+      ["/assets/capgemini-logo.webp", "Capgemini logo is served"],
+      ["/vendor/mermaid.min.js", "Mermaid is served (offline)"],
+      ["/api/flow", "flow API responds"],
+      ["/api/project/2-radar-press-synthesis", "project API responds"],
+    ];
+    for (const [route, label] of checks) {
+      const res = await fetch(`http://localhost:${PORT}${route}`);
+      if (res.ok) ok(label);
+      else fail(`${label.replace(" responds", "")} failed (HTTP ${res.status}) — check site/ and scripts/serve.mjs`);
+    }
+    const api = await (await fetch(`http://localhost:${PORT}/api/project/2-radar-press-synthesis`)).json();
+    if (Array.isArray(api.outputs) && Array.isArray(api.runs)) ok("project API returns outputs + runs");
+    else fail("project API payload malformed — check scripts/serve.mjs");
   } catch (e) {
-    console.log("\r  \x1b[31m✗\x1b[0m dev server / welcome page check failed              ");
+    console.log("\r  \x1b[31m✗\x1b[0m web app / welcome page check failed              ");
     console.log("    " + String(e.message ?? e).split("\n")[0]);
     failures++;
   } finally {
     stopServer();
   }
-} else {
-  warn("web deps not installed — run `npm --prefix web install` (IT pre-installs this)");
+}
+
+// ── Fallback front-end (web/, Next.js) — opt-in: `npm test -- --next` ───────────
+// Kept for machines where npm install works; never required for the lab to run.
+if (process.argv.includes("--next")) {
+  section("Fallback front-end (web/, Next.js) — opt-in check");
+  if (existsSync(rel("web/node_modules"))) {
+    process.stdout.write("  … building the Next.js app (~20s) … ");
+    try {
+      // execSync runs through a shell, which resolves `npm` → `npm.cmd` (via PATHEXT) on
+      // Windows. Modern Node (CVE-2024-27980 mitigation) refuses to execFile a .cmd/.bat
+      // directly and throws EINVAL. Build into .next-verify (see web/next.config.mjs) so a
+      // dev server already running on .next is never corrupted by the self-test.
+      execSync("npm run build", {
+        cwd: rel("web"),
+        stdio: ["ignore", "pipe", "pipe"],
+        env: { ...process.env, NEXT_DIST_DIR: ".next-verify" },
+      });
+      console.log("\r  \x1b[32m✓\x1b[0m Next.js app builds cleanly            ");
+    } catch (e) {
+      console.log("\r  \x1b[31m✗\x1b[0m Next.js app build failed              ");
+      const out = (String(e.stdout ?? "") + String(e.stderr ?? "")).trim();
+      console.log("    " + (out || String(e.message ?? e)).split("\n").slice(-6).join("\n    "));
+      failures++;
+    }
+  } else {
+    warn("web deps not installed — the Next.js fallback needs `npm --prefix web install`");
+  }
 }
 
 // ── Summary ───────────────────────────────────────────────────────────────────
@@ -234,7 +255,7 @@ if (failures === 0) {
   console.log(
     `\x1b[32mPASS\x1b[0m — your environment is ready` +
       (warnings ? ` (${warnings} warning(s) above)` : "") +
-      `.\nNext: run \`npm run web:dev\` and open http://localhost:3000`,
+      `.\nNext: run \`npm run web:dev\` and open http://localhost:3000 (no install needed)`,
   );
   process.exit(0);
 } else {

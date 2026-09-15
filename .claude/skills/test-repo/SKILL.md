@@ -5,7 +5,7 @@ description: Use when checking that the lab environment works — right after cl
 
 # Test the repo
 
-Verify the whole lab with **one command** — runtime, dependencies, bundled skills, agents, memory, project data, PDF reading, deck rendering, the web app build, **and an end-to-end boot of the dev server**: it starts the participants' welcome page on port 3100, checks the welcome message and the Capgemini logo are actually served, then stops it. The test script (`tests/verify.mjs`) is pure Node, offline, and cross-platform: the **same command works on macOS, Linux and Windows** (build + server checks take ~40s total).
+Verify the whole lab with **one command** — runtime, bundled skills, agents, memory, project data, the optional deps (PDF reading, deck rendering), **and an end-to-end boot of the web app**: it starts the participants' welcome page on port 3100, checks the welcome message, the live flow page, the project API and the Capgemini logo are actually served, then stops it. The test script (`tests/verify.mjs`) is pure Node, offline, and cross-platform: the **same command works on macOS, Linux and Windows** (~5s; nothing to install or build first).
 
 ## How to run
 
@@ -17,9 +17,9 @@ npm test
 
 - **Exit code 0 / `PASS`** → the environment is ready.
 - **Exit code 1 / `FAIL`** → each ✗ line says exactly what to fix. Fix, re-run.
-- ⚠️ lines are warnings (e.g. web deps not installed) — the lab core still works.
+- ⚠️ lines are warnings (e.g. root deps not installed: decks and PDF reading unavailable) — the lab core still works, the web app included.
 
-If dependencies were never installed, install them first — see the [`kick-off`](../kick-off/SKILL.md) skill (or run `npm install` then `npm --prefix web install`).
+The web app needs **no install**. The optional `npm install` (root only) enables decks and PDF reading — see the [`kick-off`](../kick-off/SKILL.md) skill; run it in the background, never block the participant on it. `npm test -- --next` additionally checks the Next.js fallback in `web/` (instructor option).
 
 ## Fixing failures — adapt commands to the OS
 
@@ -28,7 +28,7 @@ Detect the platform first (`process.platform`, or ask the participant: Mac or Wi
 | Fix | macOS / Linux | Windows (PowerShell) |
 | --- | --- | --- |
 | Reinstall root deps | `rm -rf node_modules && npm install` | `Remove-Item -Recurse -Force node_modules; npm install` |
-| Reinstall web deps | `rm -rf web/node_modules && npm --prefix web install` | `Remove-Item -Recurse -Force web\node_modules; npm --prefix web install` |
+| Reinstall web (Next.js fallback) deps, instructor only | `rm -rf web/node_modules && npm --prefix web install` | `Remove-Item -Recurse -Force web\node_modules; npm --prefix web install` |
 | Check Node ≥ 20 | `node --version` | `node --version` |
 | Chain commands | `cmd1 && cmd2` | `cmd1; if ($?) { cmd2 }` |
 
@@ -42,11 +42,11 @@ Windows notes:
 | Symptom | Fix |
 | --- | --- |
 | `Node vXX — the lab needs Node 20 or newer` | Install Node 20 LTS from nodejs.org, reopen the terminal |
-| `<dep> not installed` | `npm install` at the repo root |
-| `web deps not installed` (warning) | `npm --prefix web install` |
-| `web app build failed` | Read the last lines printed; usually a missing install or a TypeScript error in `web/` |
+| `<dep> not installed` (warning) | `npm install` at the repo root, in the background; only decks / PDF reading need it |
+| `web app did not answer on port 3100` | Something else holds port 3100, or Node < 20; read the line printed, then `node scripts/serve.mjs --port 3100` by hand to see the error |
+| `Agent Flow page failed` / `project API failed` | A file is missing in `site/` or `scripts/serve.mjs` was edited; `git status` then restore |
 | `read:pdf failed` | Re-run `npm install` (pdfjs-dist missing or corrupted) |
 
 ## When it passes
 
-Tell the participant the environment is ready and suggest the next step: `npm run web:dev` → http://localhost:3000 (see the `kick-off` skill).
+Tell the participant the environment is ready and suggest the next step: the web app at http://localhost:3000 (see the `kick-off` skill, it's probably already open).

@@ -14,7 +14,7 @@ dist/
 .cache/
 *.tsbuildinfo
 
-# Next.js (web/)
+# Next.js (web/, instructor-only fallback)
 web/.next/
 web/.next-verify/
 web/out/

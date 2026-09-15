@@ -27,7 +27,7 @@ The participant is a (possibly non-technical) executive watching the screen. The
 | Symptom | Layer | First move |
 | --- | --- | --- |
 | Not sure what's broken | Environment | `npm test` (see `test-repo`) — each ✗ line says the fix |
-| Web page blank / error / won't load | Code | Dev server logs + browser console errors, then `git diff -- web/` |
+| Web page blank / error / won't load | Code | Is `scripts/serve.mjs` running on 3000? Browser console errors, then `git diff -- site/ scripts/serve.mjs` |
 | An npm command fails | Environment | Read the **full** error; check Node ≥ 20; reinstall per-OS (table in `test-repo`) |
 | `fetch:news` empty or key error | Data | Check key presence in `.env` (value hidden); fallback: your own web search, no key needed |
 | Agent output wrong, empty, or worse than before | Agent behavior | Not a code bug: check the input data, the agent file, `memory/`. Quality issue → `refine-output` / `self-improve`, not debugging |

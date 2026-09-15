@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Agents Tech Lab</title>
+  <meta name="description" content="Front-end for the Capgemini AI-Agents lab. Renders each project's output.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <main class="site-main">
+    <section class="hero">
+      <span class="hero-logo-plate"><img src="/assets/capgemini-logo.webp" alt="Capgemini" class="hero-logo"></span>
+      <p class="kicker">AI Agents Tech Lab · Live session</p>
+      <h1>Welcome. This morning, <span class="hl">you build your own AI agent</span></h1>
+      <p class="lede">
+        An agent is like a new hire: you give it instructions, tools and experience, then it
+        works for you. By the end of the lab, yours will have produced something real, and
+        this page is where its work shows up.
+      </p>
+    </section>
+
+    <section class="steps">
+      <h2 class="section-title">What you'll do</h2>
+      <ol class="step-list">
+        <li class="step"><span class="step-n">01</span><h3>Design your agent</h3>
+          <p>Open Claude Code and say <em>“I want to build my agent”</em>. It interviews you: you answer business questions, it handles all the tooling.</p></li>
+        <li class="step"><span class="step-n">02</span><h3>Create it</h3>
+          <p>Your agent is born as a simple markdown file, its rulebook, like a new hire’s onboarding pack.</p></li>
+        <li class="step"><span class="step-n">03</span><h3>Run &amp; iterate</h3>
+          <p>Put it to work on a real task. After each run it asks you 2 questions and <strong>records what it learns</strong>, so it gets better run after run.</p></li>
+        <li class="step"><span class="step-n">04</span><h3>Showcase</h3>
+          <p>Its output becomes a polished, Capgemini-branded page, right here, for the final demo.</p></li>
+      </ol>
+    </section>
+
+    <section class="quickstart">
+      <span class="quickstart-tag">No idea? Perfect, start here</span>
+      <h2>The zero-effort start</h2>
+      <p>
+        Tell Claude Code: <span class="say">“quick start”</span>. It asks you three simple
+        questions: the competitor move to react to, the topics to watch, the story your deck
+        should tell. <strong>Then it generates everything for you</strong>: a press release, a
+        news briefing and a PowerPoint deck. No technical steps, ever. Watch the cards below
+        fill up.
+      </p>
+    </section>
+
+    <section class="card-grid-wrap">
+      <h2 class="section-title">Your agents' work, on screen</h2>
+      <div class="card-grid">
+        <a href="/radar" class="card"><span class="tag">Radar</span><h2>Press briefing &amp; releases</h2>
+          <p>The briefings and press releases your agent produced from live competitor news, fully sourced.</p></a>
+        <a href="/deck" class="card"><span class="tag">Deck</span><h2>PowerPoint decks</h2>
+          <p>The executive decks your agent built and rendered, in the Capgemini house style.</p></a>
+      </div>
+    </section>
+  </main>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

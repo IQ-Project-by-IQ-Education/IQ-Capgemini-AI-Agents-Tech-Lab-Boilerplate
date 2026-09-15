@@ -58,9 +58,11 @@ The project folders hold the **data and briefs** behind the pre-defined agents, 
 ## Quick start
 
 ```bash
-# 1. Install tooling (Node 20+) — or just ask Claude Code to "kick off the lab"
+# 1. Launch the lab web app (Node 20+, nothing to install) — or just ask Claude Code to "kick off the lab"
+npm run web:dev          # → http://localhost:3000, static app served by scripts/serve.mjs
+
+# 1b. Optional, in the background: deck rendering + PDF reading need these
 npm install
-npm --prefix web install
 
 # 2. Configure API keys (optional — only for the news/web fetch scripts)
 cp .env.example .env
@@ -76,14 +78,17 @@ claude
 #    "Ask the deck-maker agent for a deck on <topic>."
 ```
 
-The welcome page at `http://localhost:3000` (after `npm run web:dev`) walks participants
-through the same steps on screen.
+The welcome page at `http://localhost:3000` walks participants through the same steps on
+screen. The app is plain HTML in `site/`, served by a zero-dependency Node script: it starts
+in a second on any machine, on any network. (A Next.js version lives in `web/` as an
+instructor-only fallback: `npm --prefix web install` once, then `npm run web:next`.)
 
 ## Check it works
 
 Before the lab, confirm the repo runs on your machine: `npm test` — a Node self-test that
-checks everything **including booting the dev server and verifying the participants' welcome
-page end-to-end**, and exits 0 when the machine is ready. Then `npm run web:dev` for the
+checks everything **including booting the web app and verifying the participants' welcome
+page, live flow page and project API end-to-end**, and exits 0 when the machine is ready
+(~5s, no install needed; missing optional deps are warnings). Then `npm run web:dev` for the
 human eyeball on the page. Full protocol — runnable from the Claude app too — in
 [`TESTING.md`](TESTING.md).
 
@@ -122,8 +127,9 @@ What this repo needs to reach the network, and what stays local:
 
 | Capability | Network needed? | Notes |
 | --- | --- | --- |
-| `npm install` (root) | Yes, once | npm registry. Pinned via `package-lock.json`. Deps: `pptxgenjs`, `pdfjs-dist`, `tsx`, `typescript`, `@types/node` (0 known vulnerabilities). |
-| `npm --prefix web install` (front-end) | Yes, once | npm registry. `next`, `react`, `react-dom` + `mermaid` (renders the live Agent Flow page locally), pinned via `web/package-lock.json`. **Pre-install on participant machines** alongside the CV data. 2 moderate transitive advisories, acceptable for a local lab. |
+| **Web app** (`site/` + `scripts/serve.mjs`) | **No** | Static HTML + CSS + JS, `mermaid.min.js` vendored in `site/vendor/` (MIT). Zero npm packages, nothing to install or build. |
+| `npm install` (root, optional) | Yes, once | npm registry. Only for deck rendering (`pptxgenjs`) and PDF reading (`pdfjs-dist`), plus `tsx`, `typescript`, `@types/node` (0 known vulnerabilities). Pinned via `package-lock.json`. Run in the background; the lab runs without it. |
+| `npm --prefix web install` (Next.js fallback) | Yes, once | Instructor-only. `next`, `react`, `react-dom` + `mermaid`, pinned via `web/package-lock.json`. Not needed on participant machines anymore. |
 | Claude Code itself | Yes | `api.anthropic.com` — the agent engine. |
 | **Deck** project | **No** (offline) | Renders `.pptx` fully locally via `pptxgenjs`. |
 | **Talent** project | **No** for data | CVs are local PDFs read on-device. Scoring is done by Claude. |
@@ -168,17 +174,19 @@ What this repo needs to reach the network, and what stays local:
 │   ├── 1-talent-cv-scoring/   # data/cvs/ = 116 anonymized PDF CVs
 │   ├── 2-radar-press-synthesis/
 │   └── 3-deck-pptx-creation/  # incl. Capgemini brand tokens (brand/)
-├── web/                       # Minimal Next.js front-end — renders each project's output/
+├── site/                      # The lab web app — static HTML, no install (served by scripts/serve.mjs)
+├── web/                       # Next.js version of the same app — instructor-only fallback
 ├── demos/                     # Instructor-only: the memory × skill (NDA) live demo
 │   └── nda-review/            #   memory/ + a fictional NDA + output/
 ├── references/                # Vendored reading: Karpathy CLAUDE.md · knowledge-work legal
-├── scripts/                   # Helpers: fetch-news, build-deck (tsx) · read-pdf (node)
+├── scripts/                   # Helpers: serve (web app), log-run, read-pdf (node) · fetch-news, build-deck (tsx)
 └── docs/
     └── good-practices.md      # The production reflexes we voice-over during the build
 ```
 
-**Front-end:** `npm run web:dev` boots the Next.js app at `http://localhost:3000`; each route
-renders a project's `output/`. It's deliberately plain — upgrade it live with `frontend-design`.
+**Front-end:** `npm run web:dev` boots the static app at `http://localhost:3000` (no install,
+no build); each page renders a project's `output/` through two tiny read-only endpoints in
+`scripts/serve.mjs`. It's deliberately plain — upgrade it live with `frontend-design`.
 
 **Reference to steal from:** [`references/karpathy-CLAUDE.md`](references/karpathy-CLAUDE.md) — a
 short, high-signal `CLAUDE.md` to model your own agent rulebook on.

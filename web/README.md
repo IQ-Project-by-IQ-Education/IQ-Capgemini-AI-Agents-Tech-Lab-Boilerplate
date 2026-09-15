@@ -1,4 +1,11 @@
-# web — the lab front-end
+# web — the Next.js front-end (instructor-only fallback)
+
+> **Not the lab's default anymore.** Since September 2026 the lab web app is the static
+> `site/` folder served by `scripts/serve.mjs` (`npm run web:dev`): same pages, same look,
+> nothing to install. This Next.js app is kept for machines where `npm install` works fine
+> and someone wants to hack on React. Launch it with `npm run web:next` (after
+> `npm --prefix web install`), or `preview_start {name: "web-next"}` in Claude Desktop.
+> `npm test -- --next` checks that it still builds.
 
 A **minimal Next.js app** that renders each project's `output/` folder on screen:
 
@@ -14,7 +21,7 @@ stays small — only people who want the UI pull Next.js.
 From the repo root:
 
 ```bash
-npm run web:dev      # → http://localhost:3000   (or: npm --prefix web run dev)
+npm run web:next     # → http://localhost:3000   (or: npm --prefix web run dev)
 ```
 
 Drop a markdown file into a project's `output/` and refresh — the pages read at request time.

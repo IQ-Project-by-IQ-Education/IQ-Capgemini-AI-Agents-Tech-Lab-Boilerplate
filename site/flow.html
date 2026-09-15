@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent flow · AI Agents Tech Lab</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/vendor/mermaid.min.js"></script>
+</head>
+<body>
+  <main class="site-main">
+    <div class="page-head">
+      <span class="tag">Live</span>
+      <h1>Agent flow</h1>
+      <div class="source">Your agent's key actions, mapped in real time while you answer the design questions in Claude Code.</div>
+    </div>
+    <div id="app"></div>
+  </main>
+  <script src="/assets/app.js"></script>
+  <script>LabSite.ready.then(() => LabSite.mountFlow("app"));</script>
+</body>
+</html>
